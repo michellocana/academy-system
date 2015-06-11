@@ -10,7 +10,6 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import lib.ImagemEncoderHelper;
@@ -48,10 +47,6 @@ public class Recebedor extends Thread {
 		
 	}
 	
-	/* TODO - fazer a parte de envio de arquivos usando o helper do ben-hur
-	 *  	- 
-	 */
-
 	public TelaChat getTc() {
 		return tc;
 	}
@@ -88,20 +83,9 @@ public class Recebedor extends Thread {
 		JSONObject transacao = new JSONObject();
 		
 		if ( resposta == true ){
-		
 			transacao.put( "cod", 0 );
 			transacao.put( "nome", meunome );
 			transacao.put("img", ImagemEncoderHelper.encodeImage(tc.getFtEu()));
-			
-//			String minhafoto = ImagemEncoderHelper.encodeImage(foto);
-//			System.out.println("meunome: " + meunome);
-//			System.out.println("minhafoto: " + minhafoto);
-//			System.out.println("nomeparceiro: " + nomeparceiro);
-//			System.out.println("fotoparceiro: " + fotoparceiro);
-			
-			
-//			eventos.aoAceitar(socket, meunome, minhafoto, nomeparceiro, fotoparceiro);
-				
 		}else{
 			transacao.put( "cod", -1 );
 		}
@@ -128,11 +112,11 @@ public class Recebedor extends Thread {
 
 					switch( rec.getInt( "cod" ) ) {
 					
-						case -1: 
-								JOptionPane.showMessageDialog(null, "Solicita��o recusada.");
+						case -1:// Recusa conexão 
+								JOptionPane.showMessageDialog(null, "Solicitação recusada.");
 								break;
 					
-						case 0:	//caso aceite a conexao
+						case 0:	// Aceita conexão
 								
 								nomeparceiro = TelaChat.ucFirst(rec.getString( "nome" ));
 								fotoparceiro = rec.getString( "img" );
@@ -149,8 +133,8 @@ public class Recebedor extends Thread {
 																
 								break;
 						
-						case 1: //caso receba solicita��o de login
-							if (JOptionPane.showConfirmDialog( null, rec.getString("nome") + " quer conversar. Aceitar?", "Solicita��o de Conversa",
+						case 1: // Recebe solicitação de login
+							if (JOptionPane.showConfirmDialog( null, rec.getString("nome") + " quer conversar. Aceitar?", "Solicitação de Conversa",
 									JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
 								nomeparceiro = TelaChat.ucFirst(rec.getString( "nome" ));
 								fotoparceiro = rec.getString( "img" );
@@ -160,28 +144,38 @@ public class Recebedor extends Thread {
 							}
 								break;
 					
-						case 2: tc.getAreaChat().setText( tc.getAreaChat().getText() + "\n" + nomeparceiro +": " + rec.getString( "mensagem" ) );
-							    break;
-						case 3: tc.getAreaChat().setText( tc.getAreaChat().getText() + "\n ATEN��O: " + nomeparceiro + " desconectou" );
+						case 2: // Recebe texto enviado pelo parceiro
+								tc.getAreaChat().setText( tc.getAreaChat().getText() + "\n" + nomeparceiro +": " + rec.getString( "mensagem" ) );
+								break;
+						case 3: // Recebe aviso quando o parceiro desconectou
+								tc.getAreaChat().setText( tc.getAreaChat().getText() + "\n ATENÇÃO: " + nomeparceiro + " desconectou" );
 								tc.getTexto().setEnabled( false );
 								tc.getBtEnviar().setEnabled( false );
 								tc.getBtEscolheArquivo().setEnabled(false);
 								break;
-						case 4: tc.getAreaChat().setText( tc.getAreaChat().getText() + "\n" + nomeparceiro + " quer enviar um arquivo." + "\nArquivo: " + rec.getString("nomeArquivo") + " (" + rec.getInt("tamanho") + "KB)");
-								if (JOptionPane.showConfirmDialog(tc.getFrame(), nomeparceiro + " quer enviar um arquivo." + "\nArquivo: " + rec.getString("nomeArquivo") + " (" + rec.getInt("tamanho") + "KB)", "Solicita��o de envio de arquivo",
+						case 4: // Recebe solicitação de envio de arquivo
+								tc.getAreaChat().setText( tc.getAreaChat().getText() + "\n" + nomeparceiro + " quer enviar um arquivo." + "\nArquivo: " + rec.getString("nomeArquivo") + " (" + rec.getInt("tamanho")/1024 + "KB)");
+								if (JOptionPane.showConfirmDialog(tc.getFrame(), nomeparceiro + " quer enviar um arquivo." + "\nArquivo: " + rec.getString("nomeArquivo") + " (" + rec.getInt("tamanho")/1024 + "KB)", "Solicitação de envio de arquivo",
 									JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-									tc.aceitaEnvioArquivo();
-									tc.getAreaChat().setText( tc.getAreaChat().getText() + "\nVoc� aceitou o envio de arquivo.");
-									
+									tc.aceitaEnvioArquivo(rec.getInt("tamanho"),rec.getString("nomeArquivo"));
+									tc.getAreaChat().setText( tc.getAreaChat().getText() + "\nVocê aceitou o envio de arquivo.");
 								} else {
 								    tc.recusaEnvioArquivo();
-								    tc.getAreaChat().setText( tc.getAreaChat().getText() + "\nVoc� recusou o envio de arquivo.");
+								    tc.getAreaChat().setText( tc.getAreaChat().getText() + "\nVocê recusou o envio de arquivo.");
 								}
 								break;
-						case 5: tc.getAreaChat().setText( tc.getAreaChat().getText() + "\n" + nomeparceiro + " aceitou o envio de arquivos.");
+						case 5: // Recebe aviso de que o envio de arquivos foi aceito
+								tc.getAreaChat().setText( tc.getAreaChat().getText() + "\n" + nomeparceiro + " aceitou o envio de arquivos.");
 								tc.iniciaServidorArquivo( rec.getInt("porta") );
 								break;
-						case 6: tc.getAreaChat().setText( tc.getAreaChat().getText() + "\n" + nomeparceiro + " recusou o envio de arquivos.");
+						case 6: // Recebe aviso de que o envio de arquivos foi recusado
+								tc.getAreaChat().setText( tc.getAreaChat().getText() + "\n" + nomeparceiro + " recusou o envio de arquivos.");
+								break;
+						case 7: // Recebe aviso de que o envio de arquivos foi concluido
+								tc.getAreaChat().setText( tc.getAreaChat().getText() + "\n" + "Arquivo recebido com sucesso.");
+								break;
+						case 8: // Recebe aviso de que o envio de arquivos teve erro
+								tc.getAreaChat().setText( tc.getAreaChat().getText() + "\n" + "Falha no recebimento de arquivo.");
 								break;
 					}
 				}

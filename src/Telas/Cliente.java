@@ -19,6 +19,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import lib.ImagemEncoderHelper;
+import lib.FileSender;
+import lib.FileReceiver;
+import lib.IFileDownloadHandler;
 
 import org.json.JSONObject;
 
@@ -38,7 +41,7 @@ public class Cliente extends JFrame implements EventosDoServidorDeSockets {
 	
 	private String meunome;
 	private String minhafoto;
-    
+	
 	public Cliente()
 	{
 		
@@ -108,11 +111,11 @@ public class Cliente extends JFrame implements EventosDoServidorDeSockets {
 	                    if(res == JFileChooser.APPROVE_OPTION){
 	                        File arquivo = fc.getSelectedFile();  
 	                        
-	                        // Pegando a extens�o do arquivo
+	                        // Pegando a extensão do arquivo
 	                        String extensao = arquivo.getName().substring(arquivo.getName().lastIndexOf(".")+1).toLowerCase();
 	                        	
 	                        if(!extensao.equals("jpg") && !extensao.equals("jpeg")){
-	                        	JOptionPane.showMessageDialog(null, "Formato de Arquivo inv�lido.");
+	                        	JOptionPane.showMessageDialog(null, "Formato de Arquivo inválido.");
 	                        }else{
 	                        	foto.setIcon(new ImageIcon(arquivo.getAbsolutePath()));
 	                        }
@@ -195,11 +198,11 @@ public class Cliente extends JFrame implements EventosDoServidorDeSockets {
 	                    if(res == JFileChooser.APPROVE_OPTION){
 	                        File arquivo = fc.getSelectedFile();  
 	                        
-	                        // Pegando a extens�o do arquivo
+	                        // Pegando a extensão do arquivo
 	                        String extensao = arquivo.getName().substring(arquivo.getName().lastIndexOf(".")+1).toLowerCase();
 	                        	
 	                        if(!extensao.equals("jpg") && !extensao.equals("jpeg")){
-	                        	JOptionPane.showMessageDialog(null, "Formato de Arquivo inv�lido.");
+	                        	JOptionPane.showMessageDialog(null, "Formato de Arquivo inválido.");
 	                        }else{
 	                        	foto.setIcon(new ImageIcon(arquivo.getAbsolutePath()));
 	                        }
@@ -255,7 +258,7 @@ public class Cliente extends JFrame implements EventosDoServidorDeSockets {
 					
 					String base64Image = ImagemEncoderHelper.encodeImage(foto);
 					
-					//fun��o para solicitar o login com o parceiro
+					//função para solicitar o login com o parceiro
 					solicitaLogin( 1, socket, TelaChat.ucFirst(tfNome.getText()) , base64Image );
 					
 				}
@@ -294,7 +297,7 @@ public class Cliente extends JFrame implements EventosDoServidorDeSockets {
 			dos.writeUTF( transacao.toString() );
 			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog( this, "N�o foi poss�vel enviar sua solicita��o: " + e.getMessage() );
+			JOptionPane.showMessageDialog( this, "Não foi possível enviar sua solicitação: " + e.getMessage() );
 		}
 		
 	}

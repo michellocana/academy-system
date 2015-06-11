@@ -6,11 +6,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -26,6 +29,7 @@ import javax.swing.JTextArea;
 
 import org.json.JSONObject;
 
+import lib.*;
 import Servidor.EventosDoServidorDeSockets;
 import Servidor.ServidorDeSockets;
 import Threads.Recebedor;
@@ -163,7 +167,7 @@ public class TelaChat extends JFrame implements WindowListener, EventosDoServido
 		
 		/*
 		 * Pegando o jframe atual, para quando mostrar um MessageDialog, 
-		 * ficar centralizado no meio do jframe, e n�o da tela inteira 		
+		 * ficar centralizado no meio do jframe, e não da tela inteira 		
 		 */
 		frame = this;
 		this.socket = s;
@@ -218,25 +222,25 @@ public class TelaChat extends JFrame implements WindowListener, EventosDoServido
 	                			transacao.put("nomeArquivo",arquivo.getName());
 	                			
 	                			/*
-	                			 * O tamanho do arquivo � do tipo long,
-	                			 * "(int)(long)" � para transformar em int.
+	                			 * O tamanho do arquivo é do tipo long,
+	                			 * "(int)(long)" é para transformar em int.
 	                			 */
-	                			int tamanhoArquivo = (int)(long)(arquivo.length()/1024);
+	                			int tamanhoArquivo = (int)(long)(arquivo.length());
 	                			
 	                			transacao.put("tamanho", tamanhoArquivo);
 	                			
-	                			areaChat.setText( areaChat.getText() + "\nEnviando solicita��o de transfer�ncia de arquivo.\nArquivo: " + arquivo.getName() + " (" + tamanhoArquivo + "KB)");
+	                			areaChat.setText( areaChat.getText() + "\nEnviando solicitação de transferência de arquivo.\nArquivo: " + arquivo.getName() + " (" + tamanhoArquivo/1024 + "KB)");
 	                			texto.setText( "" );
 	                			texto.requestFocusInWindow();
 	                			
 	                			dos.writeUTF( transacao.toString() );
 	                			
 	                        } catch (Exception ee) {
-	                			JOptionPane.showMessageDialog( null, "N�o foi poss�vel atender sua requisi��o: " + ee.getMessage() );
+	                			JOptionPane.showMessageDialog( null, "Não foi possível atender sua requisição: " + ee.getMessage() );
 	                		}
 	                        
-	                    }
-	                    JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum arquivo."); 
+	                    }else
+	                    	JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum arquivo."); 
 	                }
 	            }   
 	        );
@@ -313,16 +317,22 @@ public class TelaChat extends JFrame implements WindowListener, EventosDoServido
 			dos.writeUTF( transacao.toString() );
 			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog( this, "N�o foi poss�vel atender sua requisi��o: " + e.getMessage() );
+			JOptionPane.showMessageDialog( this, "Não foi possível atender sua requisição: " + e.getMessage() );
 		}
 	}
 	
-	public void aceitaEnvioArquivo(){
+	public void aceitaEnvioArquivo(int tamanhoArquivo, String nomeArquivo) throws IOException{
+		
+		
+//		Respondendo que o envio de arquivos foi aceito
 		try {
 			OutputStream os = socket.getOutputStream();
 			DataOutputStream dos = new DataOutputStream( os );
-
-			int nroPorta = 64000;
+			
+			//Gerando um número de porta aleatório
+			Double random = new Double( 1 + (int)(Math.random()*65000)); 
+			int nroPorta = random.intValue();
+			System.out.println("nroPorta: " + nroPorta);
 			
 			JSONObject transacao = new JSONObject();
 			transacao.put( "cod", 5 );
@@ -330,10 +340,31 @@ public class TelaChat extends JFrame implements WindowListener, EventosDoServido
 			
 			dos.writeUTF( transacao.toString() );
 			
+			IFileDownloadHandler fdh = new IFileDownloadHandler() {
+				
+				@Override
+				public void onFinishSendFile(String fileName) {}
+				
+				@Override
+				public void onFinishReceiveFile(String fileName) {}
+				
+				@Override
+				public void onErrorSendFile(Exception e) {}
+				
+				@Override
+				public void onErrorReceiveFile(Exception e) {}
+			};
+			
+			ServerSocket serverSocket = new ServerSocket(nroPorta); 
+			Socket sock = serverSocket.accept();
+			
+			FileReceiver fr = new FileReceiver(sock, tamanhoArquivo, System.getProperty("java.io.tmpdir") + "/" + "recebido - " + nomeArquivo, fdh);
+			fr.start();
 			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog( this, "N�o foi poss�vel atender sua requisi��o: " + e.getMessage() );
+			JOptionPane.showMessageDialog( this, "Não foi possível atender sua requisição: " + e.getMessage() );
 		}
+		
 	}
 	
 	public void recusaEnvioArquivo(){
@@ -347,62 +378,76 @@ public class TelaChat extends JFrame implements WindowListener, EventosDoServido
 			dos.writeUTF( transacao.toString() );
 			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog( this, "N�o foi poss�vel atender sua requisi��o: " + e.getMessage() );
+			JOptionPane.showMessageDialog( this, "Não foi possível atender sua requisição: " + e.getMessage() );
 		}
 	}
 		
 	
 	public void iniciaServidorArquivo( int porta ){
+		
+		IFileDownloadHandler fdh2 = new IFileDownloadHandler() {
 			
-			if( servidorArquivo == null ) {
+			@Override
+			public void onFinishSendFile(String fileName) {
+				areaChat.setText(areaChat.getText() + "\n" + "Arquivo enviado com sucesso.");
 				try {
-					
-					servidorArquivo = new ServidorDeSockets( porta, this );
-					servidorArquivo.start();
-					
-					FileInputStream fis = null;
-					
-					File arquivo = fc.getSelectedFile();
-					String nomeArquivo = arquivo.getName();
-					String tmpdir = System.getProperty("java.io.tmpdir");
-					
-					System.out.println("nome do arquivo: " + nomeArquivo);
-					System.out.println("nome do arquivo: " + tmpdir);
-					
-					byte[] bFile = new byte[(int) arquivo.length()];
-					 
-					try {
-						// Convertendo arquivo em array de bytes
-						// acho que aqui � a parte que envia
-						fis = new FileInputStream(arquivo);
-						fis.read(bFile);
-						fis.close();
+					OutputStream os = socket.getOutputStream();
+					DataOutputStream dos = new DataOutputStream( os );
 
-						// Convertendo array de bytes em arquivo
-						// acho que aqui � a parte que recebe
-						FileOutputStream fileOuputStream = 
-						new FileOutputStream(tmpdir + nomeArquivo); 
-						fileOuputStream.write(bFile);
-						fileOuputStream.close();
-
-						System.out.println("enviar cod 7 para dizer que deu certo");
-						}catch(Exception e){
-							e.printStackTrace();
-						}
+					JSONObject transacao = new JSONObject();
+					transacao.put( "cod", 7 );
 					
+					dos.writeUTF( transacao.toString() );
 					
-	
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				
-			} else {
-				
-				servidorArquivo.finaliza();
-				servidorArquivo = null;
-	
 			}
+			
+			@Override
+			public void onFinishReceiveFile(String fileName) {}
+			
+			@Override
+			public void onErrorSendFile(Exception e) {
+				areaChat.setText(areaChat.getText() + "\n" + "Erro ao enviar arquivo.");
+				try {
+					OutputStream os = socket.getOutputStream();
+					DataOutputStream dos = new DataOutputStream( os );
+
+					JSONObject transacao = new JSONObject();
+					transacao.put( "cod", 8 );
+					
+					dos.writeUTF( transacao.toString() );
+					
+				} catch (Exception e2) {
+					e.printStackTrace();
+				}			
+			}
+			
+			@Override
+			public void onErrorReceiveFile(Exception e) {}
+		};
+		File arquivo = fc.getSelectedFile();
+		
+		String ipRemoto = socket.getRemoteSocketAddress().toString();
+		ipRemoto = ipRemoto.substring(0,ipRemoto.lastIndexOf(":"));
+		ipRemoto = ipRemoto.replace("localhost", "");
+		ipRemoto = ipRemoto.replace("/", "");
+		
+		String meuIp = socket.getLocalSocketAddress().toString();
+		meuIp = meuIp.substring(0,meuIp.lastIndexOf(":"));
+		meuIp = meuIp.replace("/","");
+		
+		String hostAddress = "";
+		if(ipRemoto == meuIp)
+			hostAddress = "localhost";
+		else
+			hostAddress = ipRemoto;
+
+		System.out.println("hostAddress" + hostAddress);
+		FileSender fs = new FileSender(hostAddress,porta,arquivo.getAbsolutePath(), fdh2);
+		fs.start();
+		
 			
 		}
 	
@@ -427,7 +472,7 @@ public class TelaChat extends JFrame implements WindowListener, EventosDoServido
 			dos.writeUTF( transacao.toString() );
 			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog( this, "N�o foi poss�vel enviar sua mensagem: " + e.getMessage() );
+			JOptionPane.showMessageDialog( this, "Não foi possível enviar sua mensagem: " + e.getMessage() );
 		}
 	}
 	
@@ -494,9 +539,4 @@ public class TelaChat extends JFrame implements WindowListener, EventosDoServido
 		word = word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
 		return word;
 	}
-
-
-
-	
-
 }

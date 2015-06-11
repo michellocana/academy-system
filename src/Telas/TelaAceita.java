@@ -85,11 +85,11 @@ public class TelaAceita extends JFrame{
 	                        
 	                        nomeFoto = arquivo.getName();
 	                        
-	                        // Pegando a extens�o do arquivo
+	                        // Pegando a extensão do arquivo
 	                        String extensao = arquivo.getName().substring(arquivo.getName().lastIndexOf(".")+1).toLowerCase();
 	                        	
 	                        if(!extensao.equals("jpg") && !extensao.equals("jpeg")){
-	                        	JOptionPane.showMessageDialog(null, "Formato de Arquivo inv�lido.");
+	                        	JOptionPane.showMessageDialog(null, "Formato de Arquivo inválido.");
 	                        }else{
 		                        foto.setIcon(new ImageIcon(arquivo.getAbsolutePath()));
 	                        }
@@ -132,7 +132,7 @@ public class TelaAceita extends JFrame{
 					
 					
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog( null, "N�o foi poss�vel enviar sua solicita��o: " + e.getMessage() );
+					JOptionPane.showMessageDialog( null, "Não foi possível enviar sua solicitação: " + e.getMessage() );
 				}
 				
 			}

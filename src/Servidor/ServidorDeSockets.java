@@ -24,14 +24,14 @@ public class ServidorDeSockets extends Thread {
 	@Override
 	public void run() {
 		
-		System.out.println( "Iniciando serviÁo de sockets" );
+		System.out.println( "Iniciando servi√ßo de sockets" );
 		eventos.aoIniciarServidor();
 		
 		continua = true;
 		while( continua ) {
 
 			try {
-				System.out.println( "Servidor de sockets aguardando conexıes..." );
+				System.out.println( "Servidor de sockets aguardando conex√µes..." );
 				Socket socket = getSocket();
 				
 				eventos.aoReceberSocket( socket );
@@ -45,7 +45,7 @@ public class ServidorDeSockets extends Thread {
 			}
 		}
 
-		System.out.println( "Finalizando serviÁo de sockets" );
+		System.out.println( "Finalizando servi√ßo de sockets" );
 		eventos.aoFinalizarServidor();
 	}
 	
