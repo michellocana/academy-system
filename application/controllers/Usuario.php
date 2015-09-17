@@ -7,6 +7,7 @@ class Usuario extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('usuario_model');
     }
     
     public function index(){
@@ -24,23 +25,20 @@ class Usuario extends CI_Controller {
     }
 
     public function cadastrar(){
-        // O POST TÁ VINDO CERTO, SÓ NÃO TÁ TENDO PERMISSÃO PARA FAZER AS COISAS, SEI LÁ POR QUE
-        // $obj = json_decode(file_get_contents('php://input'));
-        // echo $obj->dsNome;die;
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
 
         $data = array(
-            'dsNome'        => 'dsNome',
-            'dsSobrenome'   => 'dsSobrenome',
-            'dsNickname'    => 'dsNickname',
-            'dtNascimento'  => 'dtNascimento',
-            'dsPassword'    => 'dsPassword',
+            'dsNome'        => $request->dsNome,
+            'dsSobrenome'   => $request->dsSobrenome,
+            'dsNickname'    => $request->dsNickname,
+            'dtNascimento'  => $request->dtNascimento,
+            'dsPassword'    => md5($request->dsPassword),
         );
 
-        // echo $data;die;
+        if($return = $this->usuario_model->cadastrarUsuario($data))
+            print_r(json_encode($return));
 
-        $this->db->insert('usuario', $data);
-
-        echo "deu";
     }
 
     public function meusdados(){
