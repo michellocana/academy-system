@@ -7,6 +7,7 @@ class Login extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('login_model');
     }
     
     public function index(){
@@ -18,22 +19,27 @@ class Login extends CI_Controller {
     }
 
     public function login(){
-        $dsNickname = $this->input->post('dsNickname');
-        $dsPassword = md5($this->input->post('dsPassword'));
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
 
-        $this->db->where('dsNickname', $dsNickname);
-        $this->db->where('dsPassword', $dsPassword);
+        $dsNickname = $request->dsNickname;
+        $dsPassword = md5($request->dsPassword);
 
-        $result = $this->db->get('usuario')->result();
+        $result = $this->login_model->login($dsNickname, $dsPassword);
 
         if(sizeof($result) > 0){
             $this->session->set_userdata('logged', true);
             $this->session->set_userdata('dsNickname', $dsNickname);
             $this->session->set_userdata('dsNome', $result[0]->dsNome);
             $this->session->set_userdata('dsSobrenome', $result[0]->dsSobrenome);
-            redirect(base_url('home'));
+
+            $returnData['status'] = 'success';
+            $returnData['message'] = 'Login efetuado com successo.';
+            print_r(json_encode($returnData));            
         }else{
-            echo 'meça seus logins, parça';
+            $returnData['status'] = 'error';
+            $returnData['message'] = 'Login ou senha incorretos.';
+            print_r(json_encode($returnData));            
         }
     }
 

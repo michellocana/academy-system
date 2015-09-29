@@ -14,7 +14,8 @@ class Usuario extends CI_Controller {
         $data = array(
             "title" => "Usuário"
         );
-        $this->load->view('home',$data);
+        // fazer o index ir para a lista de usuarios
+        $this->load->view('usuario/usuario',$data);
     }
 
     public function cadastro(){
@@ -50,6 +51,7 @@ class Usuario extends CI_Controller {
         $result = $this->db->get('usuario')->result();
 
         $data = array(
+            "title" => "Meus Dados",
             'dsNickname' => $result[0]->dsNickname,
             'dsNome' => $result[0]->dsNome,
             'dsSobrenome' => $result[0]->dsSobrenome,

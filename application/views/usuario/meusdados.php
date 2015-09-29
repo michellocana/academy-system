@@ -1,15 +1,24 @@
 <?php $this->load->view('common/_head'); ?>
-<body>
-	<div id="wrapper" class="toggled">
+<body ng-app='adman' ng-controller="usuario">
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 		<?php $this->load->view('common/_menu'); ?>
-		<div id="page-content-wrapper">
-			<div class="row">
-				<div class="col-md-12">Nome de Usuário: <?php echo $dsNickname ?></div>
-				<div class="col-md-12">Nome: <?php echo $dsNome ?></div>
-				<div class="col-md-12">Sobrenome: <?php echo $dsSobrenome ?></div>
-				<div class="col-md-12">Data de Nascimento: <?php echo $dtNascimento ?></div>
+		<main class='mdl-layout__content mdl-color--grey-100'>
+			<div class="mdl-grid">
+				<div class="mdl-cell mdl-cell--12-col">
+					Nome de Usuário: <?php echo $dsNickname ?>
+				</div>
+				<div class="mdl-cell mdl-cell--12-col">
+					Nome: <?php echo $dsNome ?>
+				</div>
+				<div class="mdl-cell mdl-cell--12-col">
+					Sobrenome: <?php echo $dsSobrenome ?>
+				</div>
+				<div class="mdl-cell mdl-cell--12-col">
+					Data de Nascimento: <?php echo $dtNascimento ?>
+				</div>
 			</div>
-		</div>
+		</main>
 	</div>
+
 	<?php $this->load->view('common/_footer'); ?>
 </body>

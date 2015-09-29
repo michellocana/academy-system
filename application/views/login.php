@@ -1,21 +1,25 @@
 <?php $this->load->view('common/_head'); ?>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/login.css') ?>">
-<body>
-	<div id="fullPage">
-		<div class="row">
-			<form id='formLogin' action="<?php echo base_url('login/login') ?>" method='post'>
-				<h3 class="col-md-12">Login</h3>
-				<div class="form-group col-md-12">
-					<input class="form-control" type="text" name="dsNickname" required title="Seu nome de usuário." placeholder='Nome de Usuário' />
-				</div>
-				<div class="form-group col-md-12">
-					<input class="form-control" type="password" name="dsPassword" required title="Sua senha." placeholder='Senha' />
-				</div>
-				<div class="form-group col-md-12">
-					<input class="form-control btn btn-success" type="submit" value='Entrar' />
-				</div>
-			</form>
+<body ng-app='adman' ng-controller="login">
+	<form id='formLogin' class="demo-card-square mdl-card mdl-shadow--2dp" method='post'>
+		<div class="mdl-card__title mdl-card--expand">
+			<h2 class="mdl-card__title-text mdl-color-text--red" ng-bind="loginMessage"></h2>
 		</div>
-	</div>
+		<div class="mdl-card__supporting-text">
+			<div class="mdl-textfield mdl-js-textfield">
+				<input class="mdl-textfield__input" type="text" ng-model="login.dsNickname" id="dsNickname" />
+				<label class="mdl-textfield__label" for="dsNickname">Nome de usuário</label>
+			</div>
+			<div class="mdl-textfield mdl-js-textfield">
+				<input class="mdl-textfield__input" type="password" ng-model="login.dsPassword" id="dsPassword" />
+				<label class="mdl-textfield__label" for="dsNickname">Senha</label>
+			</div>
+		</div>
+		<div class="mdl-card__actions mdl-card--border">
+			<button ng-click='login()' class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Entrar</button>
+			<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect right">Esqueci minha senha</a>
+		</div>
+	</form>
+	<?php $this->load->view('common/_footer'); ?>
+	<script src="<?php echo base_url('assets/js/login.js'); ?>"></script>
 </body>
-<?php $this->load->view('common/_footer'); ?>

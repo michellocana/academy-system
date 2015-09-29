@@ -1,47 +1,66 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<button id="menu-toggle" type="button" class="navbar-toggle collapsed">
-				<span class="sr-only"></span>
-				<span class="glyphicon glyphicon-th-list"></span>
-			</button>
-			<a class="navbar-brand" href="<?php echo base_url() ?>">
-				<img src="https://placehold.it/50x50/f8f8f8/000000?text=A.S.">
-			</a>
+<header id='fixedHeader' class="mdl-layout__header mdl-color--white mdl-color--grey-100 mdl-color-text--grey-600">
+	<div class="mdl-layout__header-row">
+		<span class="mdl-layout-title"><?php echo (isset($title)) ? $title : "Título da página"; ?></span>
+		<div class="mdl-layout-spacer"></div>
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+			<label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+				<i class="material-icons">search</i>
+			</label>
+			<div class="mdl-textfield__expandable-holder">
+				<input class="mdl-textfield__input" type="text" id="search" placeholder='Digite sua Busca' />
+				<label class="mdl-textfield__label" for="search">Digite sua busca</label>
+			</div>
 		</div>
-		<div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Minha Conta <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="<?php echo base_url('usuario/meus-dados'); ?>">Meus Dados</a></li>
-						<li role="separator" class="divider"></li>
-						<li><a href="<?php echo base_url('login/logout') ?>">Sair</a></li>
-					</ul>
-				</li>
-			</ul>
-			<form class="navbar-form navbar-right">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Procurar">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit"><i class='glyphicon glyphicon-search'></i></button>
-					</span>
-				</div>
-			</form>
-		</div>
+		<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+			<i class="material-icons">more_vert</i>
+		</button>
+		<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+			<li class="mdl-menu__item">
+				<a href="<?php echo base_url('login/logout') ?>">Sair</a>
+			</li>
+		</ul>
 	</div>
-</nav>
-
-<div id="sidebar-wrapper">
-	<ul class="sidebar-nav">
-		<li>
-			<a href="<?php echo base_url('usuario/cadastro') ?>"><i class='glyphicon glyphicon-user'></i> Usuário</a>
-		</li>
-	</ul>
+</header>
+<div class="mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+	<header id='userInfo'>
+		<a href="<?php echo base_url() ?>">
+			<img src="<?php echo base_url('assets/img/adman-logo.png'); ?>" id="admanLogo">
+		</a>
+		<div id="dropdownNickname">
+			<img src="https://placehold.it/50/FF5722/FFFFFF?text=M" id="profilePhoto">
+			<span id='nickname' title="Michell Ocaña">@michellocana</span>
+			<div class="mdl-layout-spacer"></div>
+			<button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+				<i class="material-icons" role="presentation">arrow_drop_down</i>
+			</button>
+			<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+				<li class="mdl-menu__item"><a href="<?php echo base_url('usuario/meus-dados') ?>">Meus dados</a></li>
+			</ul>
+		</div>
+	</header>
+	<nav id='sideMenu' class="mdl-navigation mdl-color--blue-grey-800">
+		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == '') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+		<a class="dropdown mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'usuario') echo 'active' ?>" href="javascript:;"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment_ind</i>Usuário</a>
+		<ul>
+			<li>
+				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('usuario/cadastro') ?>">Cadastrar</a>
+			</li>
+			<li>
+				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('usuario/listar') ?>">Listar</a>
+			</li>
+		</ul>
+		<a class="dropdown mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'cliente') echo 'active' ?>" href="<?php echo base_url('cliente') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Cliente</a>
+		<ul>
+			<li>
+				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('cliente/cadastro') ?>">Cadastrar</a>
+			</li>
+			<li>
+				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('cliente/listar') ?>">Listar</a>
+			</li>
+		</ul>
+		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'equipamento') echo 'active' ?>" href="<?php echo base_url('equipamento') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">verified_user</i>Equipamento</a>
+		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'grafico') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">trending_up</i>Gráfico</a>
+		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'notificacoes') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">announcement</i>Notificação</a>
+		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'configuracoes') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Configuração</a>
+	</nav>
 </div>

@@ -1,5 +1,5 @@
-angular.module('academyApp', [])
-.controller('usuarioController', function($scope, $http) {
+angular.module('adman', [])
+.controller('usuario', function($scope, $http) {
 
 	$scope.matchPassword = function() {
 		if($scope.usuario.dsPassword2 !== $scope.usuario.dsPassword){
@@ -11,7 +11,7 @@ angular.module('academyApp', [])
 	$scope.cadastrarUsuario = function() {
 		$http({
 			method: 'POST',
-			url: '/academy-system/usuario/cadastrar',
+			url: '/adman/usuario/cadastrar',
 			headers: {
 				"Content-Type" :  "application/json"
 			},
