@@ -1,8 +1,134 @@
 ﻿# Host: localhost  (Version: 5.6.25)
-# Date: 2015-09-16 23:16:54
+# Date: 2015-10-09 19:31:33
 # Generator: MySQL-Front 5.3  (Build 4.234)
 
 /*!40101 SET NAMES utf8 */;
+
+#
+# Structure for table "aca_aula"
+#
+
+CREATE TABLE `aca_aula` (
+  `idAula` int(11) NOT NULL AUTO_INCREMENT,
+  `idInstrutor` int(11) DEFAULT '0',
+  `idModalidade` int(11) DEFAULT NULL,
+  `descricaoAula` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `statusAula` enum('"EXEMPLO"') CHARACTER SET utf8 NOT NULL DEFAULT '"EXEMPLO"',
+  PRIMARY KEY (`idAula`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+#
+# Data for table "aca_aula"
+#
+
+
+#
+# Structure for table "aca_cliente"
+#
+
+CREATE TABLE `aca_cliente` (
+  `idCliente` int(11) NOT NULL AUTO_INCREMENT,
+  `idUsuario` int(11) DEFAULT NULL,
+  `peso` double(3,2) DEFAULT '0.00',
+  `altura` double(3,2) NOT NULL DEFAULT '0.00',
+  `sexo` enum('"F"','"M"') COLLATE utf8_bin NOT NULL DEFAULT '"M"',
+  `endereco` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `numero` int(11) DEFAULT '0',
+  `bairro` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `cidade` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `cpf` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT '',
+  PRIMARY KEY (`idCliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+#
+# Data for table "aca_cliente"
+#
+
+
+#
+# Structure for table "aca_equipamento"
+#
+
+CREATE TABLE `aca_equipamento` (
+  `idEquipamento` int(11) NOT NULL AUTO_INCREMENT,
+  `idModalidade` int(11) NOT NULL DEFAULT '0',
+  `descricaoEquipamento` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `statusEquipamento` enum('"EX"') COLLATE utf8_bin NOT NULL DEFAULT '"EX"',
+  PRIMARY KEY (`idEquipamento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+#
+# Data for table "aca_equipamento"
+#
+
+
+#
+# Structure for table "aca_financas"
+#
+
+CREATE TABLE `aca_financas` (
+  `idFinanca` int(11) NOT NULL AUTO_INCREMENT,
+  `descricaoFinanca` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `valorFinanca` double(10,2) NOT NULL DEFAULT '0.00',
+  `tipoFinanca` enum('"DEPOSITO"') COLLATE utf8_bin NOT NULL DEFAULT '"DEPOSITO"',
+  `dataFinanca` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `idUsuario` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idFinanca`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+#
+# Data for table "aca_financas"
+#
+
+
+#
+# Structure for table "aca_log_equipamento"
+#
+
+CREATE TABLE `aca_log_equipamento` (
+  `idLogEquipamento` int(11) NOT NULL AUTO_INCREMENT,
+  `idEquipamento` int(11) NOT NULL DEFAULT '0',
+  `descricaoLogEquipamento` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `dataLogEquipamento` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT '',
+  PRIMARY KEY (`idLogEquipamento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+#
+# Data for table "aca_log_equipamento"
+#
+
+
+#
+# Structure for table "aca_modalidade"
+#
+
+CREATE TABLE `aca_modalidade` (
+  `idModalidade` int(11) NOT NULL AUTO_INCREMENT,
+  `descricaoModalidade` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  PRIMARY KEY (`idModalidade`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+#
+# Data for table "aca_modalidade"
+#
+
+
+#
+# Structure for table "aca_notificacao"
+#
+
+CREATE TABLE `aca_notificacao` (
+  `idNotificacao` int(11) NOT NULL AUTO_INCREMENT,
+  `tipoNotificacao` enum('"OUTRO"') CHARACTER SET utf8 NOT NULL DEFAULT '"OUTRO"',
+  `descricaoNotificacao` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `dataNotificacao` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT '',
+  PRIMARY KEY (`idNotificacao`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+#
+# Data for table "aca_notificacao"
+#
+
 
 #
 # Structure for table "aca_sessions"
@@ -23,7 +149,41 @@ CREATE TABLE `aca_sessions` (
 # Data for table "aca_sessions"
 #
 
-INSERT INTO `aca_sessions` VALUES ('0327f70e5cfdd403d4c7d7b7d16f7ded49c574ff','::1','',0,'__ci_last_regenerate|i:1442455896;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442455989'),('04541fab33980c4a4442e378c0a814b922f38f98','::1','',0,'__ci_last_regenerate|i:1442277265;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442277541'),('051a87e60c3dc06ab96417dfffe695a8da58ce39','::1','',0,'__ci_last_regenerate|i:1442010181;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442010387'),('0de01437675edaf06cb110f763cc0038c290b2cd','::1','',0,'__ci_last_regenerate|i:1442012961;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442013225'),('1497777cbee1bf82710a52b261fd90fa78086a8c','::1','',0,'__ci_last_regenerate|i:1441642903;logged|b:1;','1441643164'),('17d348336efefcb8f9b2249e1f357e775fd8b681','::1','',0,'__ci_last_regenerate|i:1442009120;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442009145'),('189852d136c5471cdc0e84d564d29d9101e6192f','::1','',0,'__ci_last_regenerate|i:1442453163;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442453444'),('2a062b18d1a8828b2da3584a7bf205540fc6ac67','::1','',0,'__ci_last_regenerate|i:1441643204;logged|b:1;','1441643499'),('332761a8abbe6fb3d71d97a524de0e31dc314c9c','::1','',0,'__ci_last_regenerate|i:1441645751;logged|b:1;','1441645962'),('36ada4f3d4afe27b4edcc9e1d256e87c0aa38b9e','::1','',0,'__ci_last_regenerate|i:1442015148;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442015408'),('38b8081d8e80dc39e10c22eb22c74c7b048cd0b1','::1','',0,'__ci_last_regenerate|i:1442012223;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442012504'),('456ea797974eebcc0dfacbfbd47ab8d3cbe98cbc','::1','',0,'__ci_last_regenerate|i:1442455594;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442455817'),('49122539e8c54f57f46c38bc1bea9274731ad664','::1','',0,'__ci_last_regenerate|i:1442010494;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442010685'),('49d7e125faaa118e15919fafe742b8fbe0acc195','::1','',0,'__ci_last_regenerate|i:1441923471;logged|b:1;dsNickname|s:14:\"matheuszanatta\";dsNome|s:7:\"Matheus\";dsSobrenome|s:7:\"Zanatta\";','1441923488'),('4b5579c1749ee176c129518e2241a657de2dd441','::1','',0,'__ci_last_regenerate|i:1441643578;logged|b:1;','1441643861'),('4f120fcf11dc2b64b8f4f466e358255fcc663820','::1','',0,'__ci_last_regenerate|i:1442279542;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442279684'),('5b57f352d1fbb103f0e15e7a32be5a21605a9e0a','::1','',0,'__ci_last_regenerate|i:1442014821;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442015081'),('5deb7d4501a49577fc9cbe2a296e77480178f487','::1','',0,'__ci_last_regenerate|i:1441921079;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1441921145'),('62fa55e0b49e4b89f6a8ec0d69b0b75206c2f243','::1','',0,'__ci_last_regenerate|i:1441849339;logged|b:1;','1441849373'),('65e8b46b9ff4b9d9a35b2196cb77d61416129738','::1','',0,'__ci_last_regenerate|i:1441640838;logged|b:1;','1441641090'),('6d190132d2489b11e5997d078ce30e847d3894a5','::1','',0,'__ci_last_regenerate|i:1442454166;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442454359'),('6d48005e41a57bee5c2eec27902989098b9d8697','::1','',0,'__ci_last_regenerate|i:1441922343;logged|b:1;dsNickname|s:14:\"matheuszanatta\";dsNome|s:7:\"Matheus\";dsSobrenome|s:7:\"Zanatta\";','1441922364'),('70bcf795cbe9810f0a7fd812509580ed6236e5b3','::1','',0,'__ci_last_regenerate|i:1441849601;','1441849608'),('72e8a246690611338a809e2d31e138eb6f3d8e53','::1','',0,'__ci_last_regenerate|i:1441637565;logged|b:1;','1441637821'),('767e3b050362606d89e0989844a11da43232a92c','::1','',0,'__ci_last_regenerate|i:1441848146;logged|b:1;','1441848387'),('799fe89a4d832343bb8f4d8b3ba15c489bcd245d','::1','',0,'__ci_last_regenerate|i:1442012550;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442012788'),('79d20bfe4fcaed7e0b5d59bd488c8337845e7d58','::1','',0,'__ci_last_regenerate|i:1441640503;logged|b:1;','1441640698'),('81e14552a67b49dd045987fcd9245b047e5a54de','::1','',0,'__ci_last_regenerate|i:1441637965;logged|b:1;','1441638126'),('82844d5fc134c96e9e22058656d0b476287eefad','::1','',0,'__ci_last_regenerate|i:1441641557;logged|b:1;','1441641800'),('901c77c0b0255d51ab2bfd110ddeb47d57618b04','::1','',0,'__ci_last_regenerate|i:1441921438;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1441921654'),('908d289725825c55f1f8c7d08d880c3e6fcd9b72','::1','',0,'__ci_last_regenerate|i:1442010939;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442010967'),('912c08cf31f02e1eefe095e4c00fafec9cd9b9fc','::1','',0,'__ci_last_regenerate|i:1442013269;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442013497'),('9258c083a9174d62e0aa64f48b63ad28362435d7','::1','',0,'__ci_last_regenerate|i:1442279225;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442279518'),('96c22be1685827c1a9f70ba78048fe76a36397a3','::1','',0,'__ci_last_regenerate|i:1441639416;logged|b:1;','1441639660'),('96f74c6761391c246f36d206f87f53a124aefcf6','::1','',0,'__ci_last_regenerate|i:1441640098;logged|b:1;','1441640266'),('972287a8637eb7525e60695ababe0fa3429d9e22','::1','',0,'__ci_last_regenerate|i:1442009502;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442009763'),('a3869eb6b9fb59513bb1673b3785c6aa8f31aa5b','::1','',0,'__ci_last_regenerate|i:1442453482;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442453760'),('a4f2bb557bd1734568379fee92c7d0f1808deeb9','::1','',0,'__ci_last_regenerate|i:1442278912;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442279200'),('a505eafb2cfd872f90ee1547a036792cdf588fb2','::1','',0,'__ci_last_regenerate|i:1441850957;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1441851242'),('aa6ebd369e73cbf7ef1458e3572b34f3a8cce56d','::1','',0,'__ci_last_regenerate|i:1441850196;logged|b:1;','1441850361'),('ab5cea79bf7a76aa181591329cddca30b7b7ad51','::1','',0,'__ci_last_regenerate|i:1441641929;logged|b:1;','1441642175'),('acfe1784dbceeb10af18d5961cb5a3119703ba18','::1','',0,'__ci_last_regenerate|i:1441919931;','1441919932'),('aec1fc5f087241c93a8ac6ae5c992f19c7d49df5','::1','',0,'__ci_last_regenerate|i:1441639741;logged|b:1;','1441640021'),('af0c68dfa5c7a06d4c20e9974e832a2678715b7c','::1','',0,'__ci_last_regenerate|i:1441639064;logged|b:1;','1441639342'),('b10afb66802ec19b1b46204d79f639d06bae80a4','::1','',0,'__ci_last_regenerate|i:1441647577;logged|b:1;','1441647577'),('b135a39202fccdcedd43865183e9ec0d68d1947e','::1','',0,'__ci_last_regenerate|i:1442007978;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442008239'),('b4d20ef49d1fa4b8eb5a9c1c05731fe777428045','::1','',0,'__ci_last_regenerate|i:1442007522;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442007664'),('b510690745592513c11a5ca02a27757340f0e17e','::1','',0,'__ci_last_regenerate|i:1442277872;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442278129'),('b58091dc523af739bdc575fdc9aff5d15f535410','::1','',0,'__ci_last_regenerate|i:1442278610;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442278901'),('b58f69e4895d97e4fb030ef94ca7adcbaa8c2cf5','::1','',0,'__ci_last_regenerate|i:1441848486;logged|b:1;','1441848771'),('b6535c77454ff5fe3e42e40a68d057958ce109ba','::1','',0,'__ci_last_regenerate|i:1442450877;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442450890'),('b69a48d5512422c738835bc796deb1631c84fa38','::1','',0,'__ci_last_regenerate|i:1441922820;logged|b:1;dsNickname|s:14:\"matheuszanatta\";dsNome|s:7:\"Matheus\";dsSobrenome|s:7:\"Zanatta\";','1441923048'),('b8a64619e6257cd95c3b64f80cdd2e066a604e4f','::1','',0,'__ci_last_regenerate|i:1442007038;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442007331'),('b8b4b30a1ccd5886ade667d6da50ee01ae3e7a84','::1','',0,'__ci_last_regenerate|i:1441849710;','1441850004'),('ba1b71fa9d91e73e82de9b84f843b37a974b9d90','::1','',0,'__ci_last_regenerate|i:1442006735;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442006987'),('bb0e01349a72f7c09f9c3eca541258270327609a','::1','',0,'__ci_last_regenerate|i:1442452298;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442452556'),('bd1c61cd7faabd88a2e8f1e1b1b170e6990b46a7','::1','',0,'__ci_last_regenerate|i:1441643903;logged|b:1;','1441644059'),('c9d9db0cd2e983dc5790e547499df11b13a113a4','::1','',0,'__ci_last_regenerate|i:1442015476;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442015534'),('ca46132a2b791796092bbac70feec09dd8022eab','::1','',0,'__ci_last_regenerate|i:1441920589;','1441920589'),('cb45b118167d047efc46ffc61240fecae506da7a','::1','',0,'__ci_last_regenerate|i:1441645398;logged|b:1;','1441645673'),('cc37ba62c124f3593609df1296bc53c4256c20fa','::1','',0,'__ci_last_regenerate|i:1442278282;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442278553'),('d179f6e7d689a07f9b3b83933f742dbbf7035dea','::1','',0,'__ci_last_regenerate|i:1441921855;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1441921856'),('d19b398a4d59165a6972ac9f0c3f81cce0a5919e','::1','',0,'__ci_last_regenerate|i:1442277265;','1442277265'),('d26e1635f7efdec5a5f160941c2093adb7eeadd0','::1','',0,'__ci_last_regenerate|i:1442455291;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442455589'),('d5a7720986eb4098e1e066379f2fe45bd9a01447','::1','',0,'__ci_last_regenerate|i:1442008805;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442009081'),('d69167ed0b3a8a14a622c81dc577f19c3335962c','::1','',0,'__ci_last_regenerate|i:1442449823;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442449860'),('d802a198d25ef935bc776b0c5a457470d3d24de2','::1','',0,'__ci_last_regenerate|i:1442454577;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442454647'),('dcc990e55e8eca040f31bc618bc48e347d5a6a68','::1','',0,'__ci_last_regenerate|i:1442453807;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442454051'),('dd50d6ee11cd8547e5de04f26968c79fac3b2ae0','::1','',0,'__ci_last_regenerate|i:1442006371;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442006551'),('df74f185aadb0458371eb9eed1c7d277eacb82cb','::1','',0,'__ci_last_regenerate|i:1441638343;logged|b:0;','1441638501'),('dfc1bcc72e78f65fffa8d5d8f83b101ce0041764','::1','',0,'__ci_last_regenerate|i:1442013940;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442014076'),('e2a05b80eb3d4d2dd780385f2681baa96c098e99','::1','',0,'__ci_last_regenerate|i:1442008441;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442008727'),('e35ac768fa0c098bd273af7b01fc1386dd917fce','::1','',0,'__ci_last_regenerate|i:1441849029;logged|b:1;','1441849317'),('f39131a19c2a2580c93fbb5a141e0f93b5829ede','::1','',0,'__ci_last_regenerate|i:1441638651;logged|b:1;','1441638837'),('f56b7c3d8d727f713cc29b861d26ea1cd1b5ccde','::1','',0,'__ci_last_regenerate|i:1442013591;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442013858'),('f7579ef737befb2eba20a9263a6c933c79fb4ec6','::1','',0,'__ci_last_regenerate|i:1441642238;logged|b:1;','1441642489'),('f89e55d660b4e4f276f46940bcd8f6d7d9df4984','::1','',0,'__ci_last_regenerate|i:1442454976;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442455257'),('fcd8e77a3106be578284ba0fd4aa0d2e76e3c35d','::1','',0,'__ci_last_regenerate|i:1442009878;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442010171'),('fd3eb82ad9bb7d24fe6289fceb79e882b70e88ab','::1','',0,'__ci_last_regenerate|i:1442277571;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442277869'),('fe29e167c11948ebbc2c1303e31740810d7d74c1','::1','',0,'__ci_last_regenerate|i:1441851361;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1441851384');
+INSERT INTO `aca_sessions` VALUES ('06017f6613aea0d74f4484d1fb9ccb90b40f8c49','::1','',0,'__ci_last_regenerate|i:1443223238;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443223238'),('071d6e5f8e6ad06ffbd8a7210fa8163915d06cbd','::1','',0,'__ci_last_regenerate|i:1443495683;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443495933'),('0911d3a4e91c9bb30d350362e1407057ca1278db','::1','',0,'__ci_last_regenerate|i:1443494232;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443494455'),('09af894c78106635a1d2cc740c620aff25fb3f15','::1','',0,'__ci_last_regenerate|i:1443495023;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443495320'),('0a4a93eb99125ec51909bbdc12b24e9befa6fa7e','::1','',0,'__ci_last_regenerate|i:1443223852;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443224134'),('1120263737b87f6cec6c9a5b0f6f58a3cad15d7a','::1','',0,'__ci_last_regenerate|i:1442801145;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442801443'),('117fd8f9424e0209f4f9d9ba7afcefe8573a2622','::1','',0,'__ci_last_regenerate|i:1442800533;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442800833'),('12528d0c7d8e4fc987a0fa3a6075eb29d7fbf22a','::1','',0,'__ci_last_regenerate|i:1443224143;','1443224143'),('139d5c5fd95d48796883937a24ea4eff350a5c2b','::1','',0,'__ci_last_regenerate|i:1442800162;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442800458'),('189d62e8b77a9fd425767823e5026c86a92b6ed0','::1','',0,'__ci_last_regenerate|i:1443225857;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443225899'),('18f36b951e5303a4218379ec6941517b728c5294','::1','',0,'__ci_last_regenerate|i:1443224493;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443224499'),('1b84aea104bd787ea412b32ef077c304c1107017','::1','',0,'__ci_last_regenerate|i:1443224946;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443225205'),('223aa1969cb437a258b998fe922d539e3095c391','::1','',0,'__ci_last_regenerate|i:1442801456;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442801726'),('2687fd594070e137e8d1f582969bab207c9ac056','::1','',0,'__ci_last_regenerate|i:1443270483;','1443270484'),('2774db1d3f4e4746d4a8929d0af348807fe45f4c','::1','',0,'__ci_last_regenerate|i:1443218897;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443219155'),('2a684d303a57ebd23b535bcb0c1bdf6d6eced328','::1','',0,'__ci_last_regenerate|i:1443488641;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443488882'),('32be03dfcf7e112352b89b0ac2bdecb4882ed032','::1','',0,'__ci_last_regenerate|i:1442793185;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442793467'),('34c4a05f57306d51ec21e82329c39a825e1c3bfe','::1','',0,'__ci_last_regenerate|i:1443224143;','1443224143'),('367a10f82a632763124d4e58212fa82d706c53cc','::1','',0,'__ci_last_regenerate|i:1443493269;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443493564'),('385c427465b3ae34ae598d42629be079da0956f3','::1','',0,'__ci_last_regenerate|i:1443491414;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443491709'),('3cf5ef037e8c17f91fffad44cd3374106d76ce28','::1','',0,'__ci_last_regenerate|i:1443218572;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443218848'),('3d2ac58bb4840a5197b63e1bed09de819398844e','::1','',0,'__ci_last_regenerate|i:1443491088;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443491387'),('4134b1783e88548658157b226f41ff809e7af156','::1','',0,'__ci_last_regenerate|i:1443492963;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443493239'),('430a4b78770c1a0c0ebca8ee9a6827498b960ad0','::1','',0,'__ci_last_regenerate|i:1443216395;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443216693'),('439bbc0332b315072c64ae616d6816ff37ecb96e','::1','',0,'__ci_last_regenerate|i:1443492171;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443492221'),('43b2ca6c0e320ad11eeff714e46115728e53188a','::1','',0,'__ci_last_regenerate|i:1443217426;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443217497'),('45f2fcb0426398c9765281ea8d9f8fccc100748f','::1','',0,'__ci_last_regenerate|i:1443493574;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443493850'),('48e1e0920edc6dafb77c582c299b07e4fbb0eb8c','::1','',0,'__ci_last_regenerate|i:1444356327;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1444356329'),('4bdaab0a6285c870ffe2b62e70b7636c350442b9','::1','',0,'__ci_last_regenerate|i:1442797988;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442798281'),('4db6ce3e91037290727d2578278da40bd0b8025f','::1','',0,'__ci_last_regenerate|i:1443223239;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443223513'),('4e4c24af5458808eabe554f2c80e7ac881388f3c','::1','',0,'__ci_last_regenerate|i:1443219873;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443220142'),('4e8d6da420c56fa31f3ff2ce3caa1b99297a021f','::1','',0,'__ci_last_regenerate|i:1442792989;','1442793163'),('50a31fe688d1193adfec25fd0dd8bb8876d01fd3','::1','',0,'__ci_last_regenerate|i:1442802339;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442802635'),('55bd14fac32b2ba53533bb0bb18a754f78ceed33','::1','',0,'__ci_last_regenerate|i:1444428340;','1444428340'),('5632339e3f98db6e27d554b376ae2f134e60e4ca','::1','',0,'__ci_last_regenerate|i:1442797667;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442797963'),('5744922e95147804a294ff76d1a53848a313a2d2','::1','',0,'__ci_last_regenerate|i:1443219517;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443219771'),('580b2fe5833cb7d3fbad88c08025242548aba13d','::1','',0,'__ci_last_regenerate|i:1443490482;','1443490764'),('5b256e8401bb2f731c2416cc9c0ae3dbc1c35c1f','::1','',0,'__ci_last_regenerate|i:1442798933;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442799159'),('5d19a3352febc77b779028bd82a3bec4b0286d98','::1','',0,'__ci_last_regenerate|i:1442796842;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442796857'),('5db52013ef69b048cfd84f9ff3f2c074263e0307','::1','',0,'__ci_last_regenerate|i:1442793831;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442793836'),('6008ad505daa6969b7c38853816105f8322189eb','::1','',0,'__ci_last_regenerate|i:1443224142;','1443224142'),('65f9ab40245b2576596622c71936cca90cb4c6e3','::1','',0,'__ci_last_regenerate|i:1443215684;','1443215684'),('672315c3dcd0b2a492c1927bfd71b7c3f3919e5c','::1','',0,'__ci_last_regenerate|i:1443494646;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443494908'),('67b66f123853bc6181264575b7ad242482b52476','::1','',0,'__ci_last_regenerate|i:1443496334;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443496395'),('6e9c1a0a21edbfbf3e99e03a57e0d70a5b1f1883','::1','',0,'__ci_last_regenerate|i:1443490181;','1443490467'),('6ecda5d37d07371c41141fdb830c047c98bcd2fd','::1','',0,'__ci_last_regenerate|i:1442798296;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442798530'),('6ed2c0e2aeed615f7fd375bd3d1ca323d03e4588','::1','',0,'__ci_last_regenerate|i:1442799521;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442799800'),('6ed533c62ead3b620d705144deb674a5c8cfb7c9','::1','',0,'__ci_last_regenerate|i:1443489386;','1443489678'),('6ff4358c310e2963d6f4a90af858b2a2d8807a3f','::1','',0,'__ci_last_regenerate|i:1443219210;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443219456'),('708ee2a426accac3862c94544edab30a5d0960c0','::1','',0,'__ci_last_regenerate|i:1443497338;','1443497338'),('7390412e8da2829ede4f1fa1d7404bc455ee3061','::1','',0,'__ci_last_regenerate|i:1443225672;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443225712'),('760155d4fc2f2ecdf699f1e9c7621f63718cd4e7','::1','',0,'__ci_last_regenerate|i:1443492642;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443492928'),('780c22038c3d89f375728925c2fa1c798145869a','::1','',0,'__ci_last_regenerate|i:1443216701;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443216950'),('7a32671b90b86872f8cb4a5db26bfb2b194ed5fd','::1','',0,'__ci_last_regenerate|i:1443223550;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443223849'),('7e0542780c17d20fb3d1a72a0602eb92fd109d96','::1','',0,'__ci_last_regenerate|i:1443217016;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443217190'),('8cd491230d26255d322d83ec26e7717c9620162e','::1','',0,'__ci_last_regenerate|i:1443489081;','1443489380'),('90b954f51e34cbc5e08d4e18242d1fe1addfbbb8','::1','',0,'__ci_last_regenerate|i:1443495360;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443495611'),('929ed807c238cc472c082e67c0be7a822c88c075','::1','',0,'__ci_last_regenerate|i:1442802495;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442802495'),('947b78bbe0719fe877c2e071a9d6a35ebd01b69e','::1','',0,'__ci_last_regenerate|i:1442793570;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442793585'),('95eb206529525ed2fc139a42fc430eea3a0269b1','::1','',0,'__ci_last_regenerate|i:1443487450;','1443487748'),('9674b32076027cb3eeac27276ca8ccd95ab05421','::1','',0,'__ci_last_regenerate|i:1442796929;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442797198'),('9931a602b527fa8f9d4cb8658593d986548a8f44','::1','',0,'__ci_last_regenerate|i:1442794538;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442794826'),('9b875aeae5e20c5b73167164d0d6b75e4d1980a5','::1','',0,'__ci_last_regenerate|i:1443220655;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443220691'),('a35d24366e2351f248eedac3aab82c3008d6847c','::1','',0,'__ci_last_regenerate|i:1442802030;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442802313'),('a444d895a2a22d980bd6bd501b97e3368a6e1010','::1','',0,'__ci_last_regenerate|i:1443489694;','1443489694'),('a703cee5541a41cc610a40f6d17e2239e01f249b','::1','',0,'__ci_last_regenerate|i:1443493877;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443494022'),('a73d9b4ae4165bac39f22f21c1cabdb9f4017cb3','::1','',0,'__ci_last_regenerate|i:1443217798;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443217987'),('a754d5e4d81eac3cc832c4f6e741d0444c5be265','::1','',0,'__ci_last_regenerate|i:1443487127;','1443487423'),('a796e42dfcb3718928e574225a26cbd5cd4d31e0','::1','',0,'__ci_last_regenerate|i:1442796628;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442796872'),('a83e4902a05fd189200710543e4141e08a3fc777','::1','',0,'__ci_last_regenerate|i:1442794220;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442794439'),('ad04ec8e012ebc4383f9241c5aa37e848d3ad769','::1','',0,'__ci_last_regenerate|i:1442800834;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442801068'),('ae13ddaf40293f4895bc88c230f96dd2f919a91e','::1','',0,'__ci_last_regenerate|i:1442803932;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442804227'),('b0fbf199011805ab92e1ce599d1a8a760dfbf586','::1','',0,'__ci_last_regenerate|i:1443491727;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443491993'),('b10546e7fcfecf47df0125761da76a2fc003b321','::1','',0,'__ci_last_regenerate|i:1442802991;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442803284'),('b88a047195302170507c3526a3532b1665544b6d','::1','',0,'__ci_last_regenerate|i:1443569777;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443569782'),('b96d6d9aee8f35935f514db309c7cc56bc8dac9f','::1','',0,'__ci_last_regenerate|i:1442804439;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442804439'),('bc27e2bebd2f95759ccc8512a912763a117a615d','::1','',0,'__ci_last_regenerate|i:1443496032;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443496304'),('bf3d686f86e4075614e7700abcc600b67d225426','::1','',0,'__ci_last_regenerate|i:1443490787;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443491064'),('bf469d0c85155a61e71273524afa60cc831619f7','::1','',0,'__ci_last_regenerate|i:1443225249;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443225514'),('c823b99d75ca8ae58d51e3782e05436a8806e8d9','::1','',0,'__ci_last_regenerate|i:1443224163;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443224405'),('c9ade14a65ef77145045dadb74fc3989444c78ef','::1','',0,'__ci_last_regenerate|i:1443225527;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443225733'),('d75897bbb3604defbd9a9349c38fcc2c67637c93','::1','',0,'__ci_last_regenerate|i:1443492642;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443492642'),('dcde78abcf9bbca0576c444a238d5db73da36dd7','::1','',0,'__ci_last_regenerate|i:1442803605;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442803904'),('e182baf094c5fe72535d3888d3e4a26b682e4f51','::1','',0,'__ci_last_regenerate|i:1442804239;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442804299'),('e2eb15149b2faba5d7cac4c84b5c51b918c466eb','::1','',0,'__ci_last_regenerate|i:1442803299;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442803590'),('e35d9d2ccd0fc00ff943cfdaf365933b426672cb','::1','',0,'__ci_last_regenerate|i:1442793886;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442794182'),('e42bdc0b9445486c56bcf978a4a540730149fb19','::1','',0,'__ci_last_regenerate|i:1443488058;','1443488358'),('e7178f18d8811e50adff32050f13f6f84f6133f1','::1','',0,'__ci_last_regenerate|i:1443220354;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443220654'),('ebe307e74464a512b10a51778315666648acfe8b','::1','',0,'__ci_last_regenerate|i:1442799844;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442800123'),('ec714ac5974f6b03e68d7715c0e9e92d1058f81e','::1','',0,'__ci_last_regenerate|i:1442794993;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442795042'),('edaa2e0c7aad4f63b4a5ba8320ad134e17ec3f13','::1','',0,'__ci_last_regenerate|i:1443487754;','1443487932'),('ee4d8bcb5621d3ca1beff230e35df2a40263da82','::1','',0,'__ci_last_regenerate|i:1443215733;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1443216027'),('f2007396e6b260d00c37fe093ac880b1239a90a4','::1','',0,'__ci_last_regenerate|i:1442797293;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442797560'),('fa6157877eaaaa6ac384539ff38dbe68cc30dabe','::1','',0,'__ci_last_regenerate|i:1444351347;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1444351470'),('fb0fa33f17cbd963a53a9a528cc114045f65ac6e','::1','',0,'__ci_last_regenerate|i:1442798621;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442798911'),('ffba9b220e0d575e12ca1f5ef70d6069cc4aa215','::1','',0,'__ci_last_regenerate|i:1442802654;logged|b:1;dsNickname|s:7:\"michell\";dsNome|s:7:\"Michell\";dsSobrenome|s:6:\"Ocaña\";','1442802917');
+
+#
+# Structure for table "aca_turma"
+#
+
+CREATE TABLE `aca_turma` (
+  `idTurma` int(11) NOT NULL AUTO_INCREMENT,
+  `idAula` int(11) NOT NULL DEFAULT '0',
+  `chave` varchar(5) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `capacidade` int(3) NOT NULL DEFAULT '0',
+  `horário` time NOT NULL DEFAULT '00:00:00',
+  PRIMARY KEY (`idTurma`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+#
+# Data for table "aca_turma"
+#
+
+
+#
+# Structure for table "aca_turma_cliente"
+#
+
+CREATE TABLE `aca_turma_cliente` (
+  `idTurmaCliente` int(11) NOT NULL AUTO_INCREMENT,
+  `idTurma` int(11) NOT NULL DEFAULT '0',
+  `idCliente` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idTurmaCliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+#
+# Data for table "aca_turma_cliente"
+#
+
 
 #
 # Structure for table "aca_usuario"
@@ -31,16 +191,21 @@ INSERT INTO `aca_sessions` VALUES ('0327f70e5cfdd403d4c7d7b7d16f7ded49c574ff',':
 
 CREATE TABLE `aca_usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
-  `dsNickname` varchar(12) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `dsPassword` varchar(32) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `dtNascimento` varchar(10) NOT NULL DEFAULT '',
-  `dsNome` varchar(255) NOT NULL DEFAULT '',
-  `dsSobrenome` varchar(255) NOT NULL DEFAULT '',
+  `dsNickname` varchar(12) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `dsPassword` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `dtNascimento` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `dsNome` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `dsSobrenome` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `snTipo` enum('"CLI"','"FUNC"') COLLATE utf8_bin DEFAULT '"CLI"',
+  `cpf` varchar(14) CHARACTER SET utf8 DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `senha` varchar(32) COLLATE utf8_bin DEFAULT NULL,
+  `imagem` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 #
 # Data for table "aca_usuario"
 #
 
-INSERT INTO `aca_usuario` VALUES (1,'michell','77274668b6fed85cd825e35475066338','17/03/1997','Michell','Ocaña');
+INSERT INTO `aca_usuario` VALUES (1,'michell','77274668b6fed85cd825e35475066338','17/03/1997','Michell','Ocaña','\"CLI\"',NULL,NULL,NULL,NULL),(2,'nomeusuario','a01610228fe998f515a72dd730294d87','12/12/1212','Nome','do Usuário','\"CLI\"',NULL,NULL,NULL,NULL),(3,'maisumuser','7c67e713a4b4139702de1a4fac672344','12/12/1212','Mais um','Usuário','\"CLI\"',NULL,NULL,NULL,NULL),(4,'outrousuario','81dc9bdb52d04dc20036dbd8313ed055','12/12/1212','outro','usuario','\"CLI\"',NULL,NULL,NULL,NULL),(5,'umoutro','92daa86ad43a42f28f4bf58e94667c95','12/12/1212','um','outro','\"CLI\"',NULL,NULL,NULL,NULL),(6,'porai','92daa86ad43a42f28f4bf58e94667c95','12/12/1212','mais','testes','\"CLI\"',NULL,NULL,NULL,NULL),(7,'dalalana','4c56ff4ce4aaf9573aa5dff913df997a','12/12/1212','daniel','dalalana','\"CLI\"',NULL,NULL,NULL,NULL);
