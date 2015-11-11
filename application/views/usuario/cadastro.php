@@ -7,37 +7,55 @@
 				<div class="mdl-grid">
   					<div class="mdl-cell mdl-cell--4-col">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" id="dsNome" ng-model="usuario.dsNome" maxlength="255" name="dsNome" required />
+							<input class="mdl-textfield__input" type="text" id="dsNome" ng-model="usuario.nome" maxlength="255" name="dsNome" required />
 							<label class="mdl-textfield__label" for="dsNome">Nome</label>
 						</div>
   					</div>
   					<div class="mdl-cell mdl-cell--4-col">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" id="dsSobrenome" ng-model="usuario.dsSobrenome" maxlength="255" name="dsSobrenome" required />
+							<input class="mdl-textfield__input" type="text" id="dsSobrenome" ng-model="usuario.sobrenome" maxlength="255" name="dsSobrenome" required />
 							<label class="mdl-textfield__label" for="dsSobrenome">Sobrenome</label>
 						</div>
   					</div>
   					<div class="mdl-cell mdl-cell--4-col">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" id="dsNickname"  ng-model="usuario.dsNickname" maxlength="12" name="dsNickname" required />
+							<input class="mdl-textfield__input" type="text" id="dsNickname"  ng-model="usuario.nickname" maxlength="12" name="dsNickname" required />
 							<label class="mdl-textfield__label" for="dsNickname">Nome de Usuário</label>
 						</div>
   					</div>
   					<div class="mdl-cell mdl-cell--4-col">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" id="dtNascimento" ng-model="usuario.dtNascimento" maxlength="10" class="date-input" name="dtNascimento" required />
+							<input class="mdl-textfield__input" type="text" id="dtNascimento" ng-model="usuario.dtNascimento" maxlength="10" name="dtNascimento" required ui-mask="99/99/9999" ui-mask-placeholder ui-mask-placeholder-char="_" />
 							<label class="mdl-textfield__label" for="dtNascimento">Data de Nascimento</label>
 						</div>
   					</div>
   					<div class="mdl-cell mdl-cell--4-col">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" ng-model='usuario.dsPassword' maxlength="255" name="dsPassword" type="password" required />
+							<input class="mdl-textfield__input" type="email" id="dsEmail" ng-model="usuario.email" maxlength="255" name="dsEmail" title="Seu endereço de e-mail no formato: exemplo@email.com.br" required />
+							<label class="mdl-textfield__label" for="dsEmail">E-mail</label>
+						</div>
+  					</div>
+  					<div class="mdl-cell mdl-cell--4-col">
+						<div class="mdl-textfield mdl-js-textfield">
+							<input class="mdl-textfield__input" type="text" id="dsCpf" ng-model="usuario.cpf" maxlength="14" name="dsCpf" required ui-mask="999.999.999-99" ui-mask-placeholder ui-mask-placeholder-char="_"/>
+							<label class="mdl-textfield__label" for="dsCpf">CPF</label>
+						</div>
+  					</div>
+  					<div class="mdl-cell mdl-cell--4-col">
+						<div class="mdl-textfield">
+							<label class="mdl-textfield__input fake-input-file" for="dsFileUsuario">Imagem de perfil (não obrigatória)</label>
+							<input type="file" id="dsFileUsuario" ng-model="usuario.dsFile" maxlength="10" name="dsFile" />
+						</div>
+  					</div>
+  					<div class="mdl-cell mdl-cell--4-col">
+						<div class="mdl-textfield mdl-js-textfield">
+							<input class="mdl-textfield__input" ng-model='usuario.senha' maxlength="255" name="senha" type="password" required />
 							<label class="mdl-textfield__label" for="dsNickname">Senha</label>
 						</div>
   					</div>
   					<div class="mdl-cell mdl-cell--4-col">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input"  ng-model='usuario.dsPassword2' maxlength="255" ng-blur='matchPassword()' name="dsRepeatPassword" type="password"  title="As senhas dos dois campos devem coincidir." required />
+							<input class="mdl-textfield__input"  ng-model='usuario.senha2' maxlength="255" ng-blur='matchPassword()' name="dsRepeatPassword" type="password" title="As senhas dos dois campos devem coincidir." required />
 							<label class="mdl-textfield__label" for="dsNickname">Repita a senha</label>
 						</div>
   					</div>

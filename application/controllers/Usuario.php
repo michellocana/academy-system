@@ -30,11 +30,13 @@ class Usuario extends CI_Controller {
         $request = json_decode($postdata);
 
         $data = array(
-            'dsNome'        => $request->dsNome,
-            'dsSobrenome'   => $request->dsSobrenome,
-            'dsNickname'    => $request->dsNickname,
+            'nome'          => $request->nome,
+            'sobrenome'     => $request->sobrenome,
+            'nickname'      => $request->nickname,
             'dtNascimento'  => $request->dtNascimento,
-            'dsPassword'    => md5($request->dsPassword),
+            'email'         => $request->email,
+            'cpf'           => $request->cpf,
+            'senha'         => md5($request->senha),
         );
 
         if($return = $this->usuario_model->cadastrarUsuario($data))
@@ -45,19 +47,31 @@ class Usuario extends CI_Controller {
     public function meusdados(){
         $session = $this->session->all_userdata();
 
-        $this->db->select('dsNickname, dsNome, dsSobrenome, dtNascimento');
-        $this->db->where('dsNickname', $this->session->userdata('dsNickname'));
+        $this->db->select('nickname, nome, sobrenome, dtNascimento');
+        $this->db->where('nickname', $this->session->userdata('nickname'));
         
         $result = $this->db->get('usuario')->result();
 
         $data = array(
-            "title" => "Meus Dados",
-            'dsNickname' => $result[0]->dsNickname,
-            'dsNome' => $result[0]->dsNome,
-            'dsSobrenome' => $result[0]->dsSobrenome,
-            'dtNascimento' => $result[0]->dtNascimento,
+            "title"         => "Meus Dados",
+            'nickname'      => $result[0]->nickname,
+            'nome'          => $result[0]->nome,
+            'sobrenome'     => $result[0]->sobrenome,
+            'dtNascimento'  => $result[0]->dtNascimento,
         );
 
         $this->load->view('usuario/meusdados', $data);
+    }
+
+    public function listar(){
+        $data = array(
+            "title"         => "Lista de Usuários",
+        );
+
+        $return = $this->usuario_model->listarUsuarios($data);
+        $data['usuarios'] = $return;
+
+
+        $this->load->view('usuario/lista', $data);
     }
 }

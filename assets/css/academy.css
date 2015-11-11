@@ -151,6 +151,11 @@ html, body {
     border-color: #fff !important;
 }
 
+#fixedHeader .mdl-layout-title{
+    width: 100%;
+    text-align: center;
+}
+
 .mdl-layout__content{
     /*padding: 0 16px;*/
     padding: 0 1.875rem;
@@ -199,3 +204,50 @@ html, body {
     #sideMenu .dropdown + ul li a{
         height: 10px;
     }
+
+.fake-input-file{
+    color: #b7b7b7;
+    font-weight: lighter;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fake-input-file ~ input[type=file]{
+    display: none;
+}
+
+input[type=password][required]{
+    border-color: #de3226 !important;        
+}
+
+[ui-mask]::-webkit-input-placeholder {
+    opacity: 0;
+}
+[ui-mask]::-moz-placeholder {
+    opacity: 0;
+}
+[ui-mask]:-ms-input-placeholder {
+    opacity: 0;
+}
+[ui-mask]:-moz-placeholder {
+    opacity: 0;
+}
+
+.mtop30{
+    margin-top: 30px
+}
+
+.mdl-button.small{
+    height: 24px;
+    line-height: 24px;
+}
+
+.mdl-data-table td{
+    padding-top: 0
+}
+
+.mdl-data-table{
+    margin-left: auto;
+    margin-right: auto;
+}

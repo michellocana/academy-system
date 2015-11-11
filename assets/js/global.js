@@ -10,3 +10,23 @@ $(document).ready(function(){
 	$(".cpf-input").mask('999.999.999-99');
 	$(".cnpj-input").mask('99.999.999/9999-99');    
 });
+
+$('input[type=file]').change(function(event){
+	var fileName = (event.target.files[0].name);
+
+	$(event.target).parent().children('label').text(fileName);
+});
+
+$('input[type=password]').on('propertychange change click keyup input paste', function(event){
+	var label = $($(event.target).parent().children('label'));
+	
+	if(event.target.value.length >= 1){
+		label.css({
+			fontSize: 0
+		});
+	}else{
+		label.css({
+			fontSize: 'initial'
+		});
+	}
+});
