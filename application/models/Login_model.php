@@ -9,9 +9,9 @@ class Login_model extends CI_Model{
 		parent::__construct();
 	}
 
-	public function login($dsNickname, $dsPassword){
-		$this->db->where('dsNickname', $dsNickname);
-    	$this->db->where('dsPassword', $dsPassword);
+	public function login($nickname, $senha){
+		$this->db->where('nickname', $nickname);
+    	$this->db->where('senha', $senha);
 		$result = $this->db->get($this->table)->result();
 		return $result;
 	}

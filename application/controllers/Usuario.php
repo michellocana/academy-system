@@ -14,20 +14,20 @@ class Usuario extends CI_Controller {
         $data = array(
             "title" => "Usuário"
         );
-        // fazer o index ir para a lista de usuarios
-        $this->load->view('usuario/usuario',$data);
+        redirect(base_url('usuario/listar'));
     }
 
     public function cadastro(){
         $data = array(
             "title" => "Cadastro de Usuário"
         );
-        $this->load->view('usuario/cadastro',$data);
+        $this->load->view('usuario/cadastrar',$data);
     }
 
     public function cadastrar(){
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata);
+        $request = $request->usuario;
 
         $data = array(
             'nome'          => $request->nome,
@@ -41,6 +41,44 @@ class Usuario extends CI_Controller {
 
         if($return = $this->usuario_model->cadastrarUsuario($data))
             print_r(json_encode($return));
+
+    }
+
+    public function alterar($isCliente = false){
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
+        $usuario = $request->usuario;
+        $isCliente = $request->isCliente;
+
+        $data = array(
+            'idUsuario'     => $usuario->idUsuario,
+            'nome'          => $usuario->nome,
+            'sobrenome'     => $usuario->sobrenome,
+            'nickname'      => $usuario->nickname,
+            'dtNascimento'  => $usuario->dtNascimento,
+            'email'         => $usuario->email,
+            'cpf'           => $usuario->cpf,
+        );
+
+        if($isCliente == 'true'){
+            $dataCliente = array(
+                'peso'      => $usuario->peso, 
+                'altura'    => $usuario->altura, 
+                'sexo'      => $usuario->sexo, 
+                'endereco'  => $usuario->endereco, 
+                'numero'    => $usuario->numero, 
+                'bairro'    => $usuario->bairro, 
+                'cidade'    => $usuario->cidade, 
+            );
+
+            if($return = $this->usuario_model->alterarUsuario($data, $dataCliente))
+                print_r(json_encode($return));
+        }else{
+            if($return = $this->usuario_model->alterarUsuario($data))
+                print_r(json_encode($return));
+        }
+
+
 
     }
 
@@ -72,6 +110,42 @@ class Usuario extends CI_Controller {
         $data['usuarios'] = $return;
 
 
-        $this->load->view('usuario/lista', $data);
+        $this->load->view('usuario/listar', $data);
+
+    }
+
+    public function excluir($idUsuario = null){
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
+
+        $idUsuario = $request->idUsuario;
+
+        $this->usuario_model->excluirUsuario($idUsuario);
+    }
+
+    public function editar(){
+        $data = array(
+            "title"         => "Editar Usuário"
+        );
+
+        $this->load->view('usuario/editar', $data);
+    }
+
+    public function infoUsuario($idUsuario = null, $isCliente = false){
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
+        $idUsuario = $request->idUsuario;
+        $isCliente = $request->isCliente;
+
+        if($isCliente == 'true'){
+            if($return = $this->usuario_model->infoUsuario($idUsuario, true)[0])
+                print_r(json_encode($return));
+        }else{
+            // echo "oi ";die;
+            if($return = $this->usuario_model->infoUsuario($idUsuario)[0])
+                print_r(json_encode($return));
+        }
+
+
     }
 }

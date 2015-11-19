@@ -25,10 +25,10 @@
 						<td><?php echo strip_quotation_marks($u->snTipo) ?></td>
 						<td><?php echo $u->email ?></td>
 						<td>
-							<a href="javascript:;" class="mdl-button small mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+							<a href="<?php echo base_url('usuario/editar') . '/' . $u->idUsuario ?>" class="mdl-button small mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
 								Editar
 							</a>
-							<a href="javascript:;" class="excluirUsuario mdl-button small mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+							<a ng-click="excluir(<?php echo $u->idUsuario ?>, '<?php echo $u->nome ?>')" class="mdl-button small mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
 								Excluir
 							</a>
 						</td>
@@ -40,22 +40,5 @@
 	</div>
 
 	<?php $this->load->view('common/_footer'); ?>
-
-	<script type="text/javascript">
-		$(".excluirUsuario").on( 'click', function () {
-			alertify.set({ labels: {
-				ok     : "Sim",
-				cancel : "Não"
-			} });
-			alertify.confirm("Deseja excluir \"Nome do usuário\"?", function (e) {
-				if (e) {
-					alertify.success("You've clicked OK");
-				} else {
-					alertify.error("You've clicked Cancel");
-				}
-			});
-			return false;
-		});
-	</script>
 </body>
 

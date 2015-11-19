@@ -10,8 +10,8 @@ angular.module('adman', [])
 				"Content-Type" :  "application/json"
 			},
 			data: JSON.stringify({
-				dsNickname: 	$scope.login.dsNickname,
-				dsPassword: 	$scope.login.dsPassword,
+				nickname: 	$scope.login.nickname,
+				senha: 		$scope.login.senha,
 			})
 		}).success(function(data){
 			if(data.status == 'success'){

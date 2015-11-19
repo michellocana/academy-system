@@ -5,13 +5,13 @@
 		<main class='mdl-layout__content mdl-color--grey-100'>
 			<div class="mdl-grid">
 				<div class="mdl-cell mdl-cell--12-col">
-					Nome de Usuário: <?php echo $dsNickname ?>
+					Nome de Usuário: <?php echo $nickname ?>
 				</div>
 				<div class="mdl-cell mdl-cell--12-col">
-					Nome: <?php echo $dsNome ?>
+					Nome: <?php echo $nome ?>
 				</div>
 				<div class="mdl-cell mdl-cell--12-col">
-					Sobrenome: <?php echo $dsSobrenome ?>
+					Sobrenome: <?php echo $sobrenome ?>
 				</div>
 				<div class="mdl-cell mdl-cell--12-col">
 					Data de Nascimento: <?php echo $dtNascimento ?>

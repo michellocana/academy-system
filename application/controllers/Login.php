@@ -22,16 +22,16 @@ class Login extends CI_Controller {
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata);
 
-        $dsNickname = $request->dsNickname;
-        $dsPassword = md5($request->dsPassword);
+        $nickname = $request->nickname;
+        $senha = md5($request->senha);
 
-        $result = $this->login_model->login($dsNickname, $dsPassword);
+        $result = $this->login_model->login($nickname, $senha);
 
         if(sizeof($result) > 0){
             $this->session->set_userdata('logged', true);
-            $this->session->set_userdata('dsNickname', $dsNickname);
-            $this->session->set_userdata('dsNome', $result[0]->dsNome);
-            $this->session->set_userdata('dsSobrenome', $result[0]->dsSobrenome);
+            $this->session->set_userdata('nickname', $nickname);
+            $this->session->set_userdata('nome', $result[0]->nome);
+            $this->session->set_userdata('sobrenome', $result[0]->sobrenome);
 
             $returnData['status'] = 'success';
             $returnData['message'] = 'Login efetuado com successo.';

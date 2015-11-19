@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/alertify.core.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/alertify.default.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/material.min.css') ?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/global.css') ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/academy.css') ?>" />
 	<!-- <link rel="stylesheet" type="text/css" href="<?php //echo base_url('assets/css/medias.css') ?>" /> -->
 	<link rel="shortcut icon" href="<?php echo base_url('assets/img/icon.png'); ?>">

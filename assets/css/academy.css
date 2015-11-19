@@ -163,6 +163,8 @@ html, body {
 
 .form-options{
     margin: 0 0 0 10px;
+    display: block;
+    float: left;
 }
 
 .mdl-menu.mdl-menu--bottom-right a{
@@ -239,10 +241,20 @@ input[type=password][required]{
 }
 
 .mdl-button.small{
+    /*padding: 0;*/
+    /*min-width: 80px;*/
     height: 24px;
     line-height: 24px;
+        padding: 0 5px;
 }
 
+.mdl-data-table tr{
+    -webkit-transition: max-height 1s ease-in-out;
+    -moz-transition: max-height 1s ease-in-out;
+    -ms-transition: max-height 1s ease-in-out;
+    -o-transition: max-height 1s ease-in-out;
+    transition: max-height 1s ease-in-out;
+}
 .mdl-data-table td{
     padding-top: 0
 }
@@ -250,4 +262,16 @@ input[type=password][required]{
 .mdl-data-table{
     margin-left: auto;
     margin-right: auto;
+}
+
+#alertify-ok,
+#alertify-cancel{
+    margin: 0 5px;
+}
+
+.alertify-log-error{
+    background-color: rgb(255,82,82);
+}
+.alertify-log-success{
+    background-color: #4caf50 !important;
 }

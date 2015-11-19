@@ -40,22 +40,13 @@
 	</header>
 	<nav id='sideMenu' class="mdl-navigation mdl-color--blue-grey-800">
 		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == '') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-		<a class="dropdown mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'usuario') echo 'active' ?>" href="javascript:;"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment_ind</i>Usuário</a>
+		<a class="dropdown mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'usuario') echo 'active' ?>" href="javascript:;"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Usuário</a>
 		<ul>
 			<li>
 				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('usuario/cadastro') ?>">Cadastrar</a>
 			</li>
 			<li>
 				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('usuario/listar') ?>">Listar</a>
-			</li>
-		</ul>
-		<a class="dropdown mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'cliente') echo 'active' ?>" href="<?php echo base_url('cliente') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Cliente</a>
-		<ul>
-			<li>
-				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('cliente/cadastro') ?>">Cadastrar</a>
-			</li>
-			<li>
-				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('cliente/listar') ?>">Listar</a>
 			</li>
 		</ul>
 		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'equipamento') echo 'active' ?>" href="<?php echo base_url('equipamento') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">verified_user</i>Equipamento</a>

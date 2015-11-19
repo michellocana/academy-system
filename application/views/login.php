@@ -7,12 +7,12 @@
 		</div>
 		<div class="mdl-card__supporting-text">
 			<div class="mdl-textfield mdl-js-textfield">
-				<input class="mdl-textfield__input" type="text" ng-model="login.dsNickname" id="dsNickname" />
-				<label class="mdl-textfield__label" for="dsNickname">Nome de usuário</label>
+				<input class="mdl-textfield__input" type="text" ng-model="login.nickname" id="nickname" />
+				<label class="mdl-textfield__label" for="nickname">Nome de usuário</label>
 			</div>
 			<div class="mdl-textfield mdl-js-textfield">
-				<input class="mdl-textfield__input" type="password" ng-model="login.dsPassword" id="dsPassword" />
-				<label class="mdl-textfield__label" for="dsNickname">Senha</label>
+				<input class="mdl-textfield__input" type="password" ng-model="login.senha" id="senha" />
+				<label class="mdl-textfield__label" for="senha">Senha</label>
 			</div>
 		</div>
 		<div class="mdl-card__actions mdl-card--border">
