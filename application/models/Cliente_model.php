@@ -14,7 +14,7 @@ class Cliente_model extends CI_Model{
 
 		// Atualizando usuário para tipo "cliente"
 		$snTipo = array(
-			'snTipo' => '"CLI"',
+			'snTipo' => 'CLI',
 		);
 
 		$this->db->where('idUsuario', $data['idUsuario']);

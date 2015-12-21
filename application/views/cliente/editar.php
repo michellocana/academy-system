@@ -21,7 +21,7 @@
 		</div>
 	</div>
 
-	<div class="mdl-cell mdl-cell--4-col">
+	<div class="mdl-cell mdl-cell--4-col pdtop20 pdbot20">
 		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sexoMasculino">
 			<input type="radio" id="sexoMasculino" class="mdl-radio__button" name="sexo" ng-model="usuario.sexo" value='"M"'>
 			<span class="mdl-radio__label">Masculino</span>

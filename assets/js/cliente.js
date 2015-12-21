@@ -5,6 +5,7 @@ angular.module('adman', ['ui.mask', 'Alertify'])
 		$scope.cliente.idUsuario = $scope.idUsuario;
 		// console.log($scope.cliente);
 		// return;
+		console.log($scope.cliente);
 		$http({
 			method: 'POST',
 			url: '/adman/cliente/cadastrar',

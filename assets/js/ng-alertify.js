@@ -38,11 +38,12 @@
 		dialogs = {
 			buttons : {
 				holder : "<nav class=\"alertify-buttons\">{{buttons}}</nav>",
-				submit : "<button type=\"submit\" class=\"mdl-button mdl-button--colored mdl-button--accent mdl-button--raised\" id=\"alertify-ok\">{{ok}}</button>",
+				submit : "<button type=\"submit\" class=\"mdl-button mdl-button--colored mdl-button--accent mdl-color--green mdl-button--raised\" id=\"alertify-ok\">{{ok}}</button>",
 				ok : "<button class=\"mdl-button mdl-button--colored mdl-button--accent mdl-color--green mdl-button--raised\" id=\"alertify-ok\">{{ok}}</button>",
 				cancel : "<button class=\"mdl-button mdl-button--colored mdl-button--accent mdl-button--raised\" id=\"alertify-cancel\">{{cancel}}</button>",
 			},
-			input   : "<div class=\"alertify-text-wrapper\"><input type=\"text\" class=\"alertify-text\" id=\"alertify-text\"></div>",
+			// input   : "<div class=\"alertify-text-wrapper\"><input type=\"text\" class=\"alertify-text\" id=\"alertify-text\"></div>",
+			input   : "<div class=\"mdl-textfield mdl-js-textfield mbot20\"> <textarea class=\"mdl-textfield__input\" type=\"text\" rows= \"5\" id=\"alertify-text\" ></textarea> <label class=\"mdl-textfield__label\" for=\"alertify-text\">Digite sua mensagem</label> </div>",
 			message : "<p class=\"alertify-message\">{{message}}</p>",
 			log     : "<article class=\"alertify-log{{class}}\">{{message}}</article>"
 		};
@@ -98,8 +99,8 @@
 			 * @type {Object}
 			 */
 			labels : {
-				ok     : "Sim",
-				cancel : "Não"
+				ok     : "Ok",
+				cancel : "Cancelar"
 			},
 
 			/**
@@ -299,7 +300,6 @@
 				default:
 					break;
 				}
-
 				elDialog.className = "alertify alertify-" + type + " " + css;
 				elCover.className  = "alertify-cover";
 				return html;
@@ -586,6 +586,11 @@
 				}
 				// build the proper dialog HTML
 				elDialog.innerHTML = this.build(item);
+
+				// Upgrading MDL Textfields
+				componentHandler.upgradeDom('MaterialTextfield');
+
+
 				// assign all the common elements
 				btnReset  = $("alertify-resetFocus");
 				btnResetBack  = $("alertify-resetFocusBack");

@@ -38,6 +38,7 @@ class Cliente extends CI_Controller {
             'numero'    => $request->numero,
             'bairro'    => $request->bairro,
             'cidade'    => $request->cidade,
+            'telefone'  => str_replace('_', '', $request->telefone),
         );
 
         if($return = $this->cliente_model->cadastrarCliente($data))

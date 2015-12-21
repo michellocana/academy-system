@@ -22,13 +22,13 @@
 						</div>
 					</div>
 						
-  					<div class="mdl-cell mdl-cell--4-col">
+  					<div class="mdl-cell mdl-cell--4-col pdtop20 pdbot20">
 						<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sexoMasculino">
-							<input type="radio" id="sexoMasculino" class="mdl-radio__button" name="sexo" ng-model="cliente.sexo" value='"M"' checked>
+							<input type="radio" id="sexoMasculino" class="mdl-radio__button" name="sexo" ng-model="cliente.sexo" value='M' checked>
 							<span class="mdl-radio__label">Masculino</span>
 						</label>
 						<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sexoFeminino">
-							<input type="radio" id="sexoFeminino" class="mdl-radio__button" name="sexo" ng-model="cliente.sexo" value='"F"'>
+							<input type="radio" id="sexoFeminino" class="mdl-radio__button" name="sexo" ng-model="cliente.sexo" value='F'>
 							<span class="mdl-radio__label">Feminino</span>
 						</label>
 					</div>
@@ -58,6 +58,13 @@
 						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 							<input class="mdl-textfield__input" type="text" id="cidade" ng-model="cliente.cidade" maxlength="255" required />
 							<label class="mdl-textfield__label" for="cidade">Cidade</label>
+						</div>
+  					</div>
+
+  					<div class="mdl-cell mdl-cell--4-col">
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<input class="mdl-textfield__input" type="text" id="telefone" ng-model="cliente.telefone" maxlength="15" required ui-mask="(99)9999-9999?9" model-view-value="true" ui-mask-placeholder ui-mask-placeholder-char="_" />
+							<label class="mdl-textfield__label" for="telefone">Telefone</label>
 						</div>
   					</div>
   				</div>

@@ -33,7 +33,7 @@
 				ok : "<button class=\"mdl-button mdl-button--colored mdl-button--accent mdl-color--green mdl-button--raised\" id=\"alertify-ok\">{{ok}}</button>",
 				cancel : "<button class=\"mdl-button mdl-button--colored mdl-button--accent mdl-button--raised\" id=\"alertify-cancel\">{{cancel}}</button>",
 			},
-			input   : "<div class=\"alertify-text-wrapper\"><input type=\"text\" class=\"alertify-text\" id=\"alertify-text\"></div>",
+			input   : "<div class=\"mdl-textfield mdl-js-textfield\"><textarea class=\"mdl-textfield__input\" type=\"text\" rows= \"3\" id=\"alertifyTextarea\" ></textarea> <label class=\"mdl-textfield__label\" for=\"alertifyTextarea\">Text lines...</label> </div>",
 			message : "<p class=\"alertify-message\">{{message}}</p>",
 			log     : "<article class=\"alertify-log{{class}}\">{{message}}</article>"
 		};

@@ -40,7 +40,7 @@
 	</header>
 	<nav id='sideMenu' class="mdl-navigation mdl-color--blue-grey-800">
 		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == '') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-		<a class="dropdown mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'usuario') echo 'active' ?>" href="javascript:;"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Usuário</a>
+		<a class="dropdown mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'usuario') echo 'active' ?>" href="javascript:;"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>Usuários</a>
 		<ul>
 			<li>
 				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('usuario/cadastro') ?>">Cadastrar</a>
@@ -49,9 +49,25 @@
 				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('usuario/listar') ?>">Listar</a>
 			</li>
 		</ul>
-		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'equipamento') echo 'active' ?>" href="<?php echo base_url('equipamento') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">verified_user</i>Equipamento</a>
-		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'grafico') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">trending_up</i>Gráfico</a>
-		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'notificacoes') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">announcement</i>Notificação</a>
-		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'configuracoes') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Configuração</a>
+		<a class="dropdown mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'equipamento') echo 'active' ?>" href="<?php echo base_url('equipamento') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">verified_user</i>Equipamentos</a>
+		<ul>
+			<li>
+				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('equipamento/historico') ?>">Histórico</a>
+			</li>
+		</ul>
+		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'modalidade') echo 'active' ?>" href="<?php echo base_url('modalidade') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">extension</i>Modalidades de treino</a>
+		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'aula') echo 'active' ?>" href="<?php echo base_url('aula') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">class</i>Aulas</a>
+		<a class="dropdown mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'turma') echo 'active' ?>" href="javascript:;"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">group_add</i>Turmas</a>
+		<ul>
+			<li>
+				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('turma/cadastro') ?>">Cadastrar</a>
+			</li>
+			<li>
+				<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url('turma/listar') ?>">Listar</a>
+			</li>
+		</ul>
+		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'grafico') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">trending_up</i>Gráficos</a>
+		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'notificacoes') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">announcement</i>Notificações</a>
+		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'configuracoes') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Configurações</a>
 	</nav>
 </div>

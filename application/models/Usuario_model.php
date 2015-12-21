@@ -104,10 +104,7 @@ class Usuario_model extends CI_Model{
 			$this->db->where('idUsuario', $idUsuario);
 			$result = $this->db->get($this->table)->result();
 		}
-
-		// echo $idUsuario; die;
-		// echo '<pre> ' . print_r($result,1);die;
-
+		
 		return $result;
 	}
 

@@ -20,3 +20,12 @@ if(!function_exists('isCliente')){
 		return ($result == 'CLI') ? true : false;
 	}
 }
+
+if(!function_exists('getPost')){
+	function getPost(){
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
+
+        return $request;
+	}
+}

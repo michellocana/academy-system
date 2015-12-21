@@ -141,7 +141,6 @@ class Usuario extends CI_Controller {
             if($return = $this->usuario_model->infoUsuario($idUsuario, true)[0])
                 print_r(json_encode($return));
         }else{
-            // echo "oi ";die;
             if($return = $this->usuario_model->infoUsuario($idUsuario)[0])
                 print_r(json_encode($return));
         }
