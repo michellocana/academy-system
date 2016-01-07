@@ -82,4 +82,14 @@ class Turma extends CI_Controller {
 
         $this->turma_model->getClientesMatriculados($idTurma);
     }
+
+    public function addMatriculaCliente(){
+        $idTurma = getPost();
+        $this->turma_model->addMatriculaCliente($idTurma);
+    }
+
+    public function getClientesNaoMatriculados(){
+        $idTurma = getPost();
+        $this->turma_model->getClientesNaoMatriculados($idTurma);
+    }
 }

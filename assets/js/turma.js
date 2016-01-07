@@ -12,13 +12,16 @@ angular.module('adman', ['ui.mask', 'Alertify'])
 		}).success(function(data){
 			$scope.aulas = data.aulas;
 			$scope.instrutores = data.instrutores;
+			componentHandler.upgradeAllRegistered();
 		});
 			
 		// Caso for editar
 		if(idTurma){
 			$scope.getInfo(idTurma);
 			$scope.getClientesMatriculados(idTurma);
+			$scope.getClientesNaoMatriculados(idTurma);
 		}
+
 	};
 
 	$scope.getInfo = function(idTurma){
@@ -44,13 +47,26 @@ angular.module('adman', ['ui.mask', 'Alertify'])
 			},
 			data: idTurma,
 		}).success(function(data){
-			console.log(data)
 			$scope.clientes = data;
 		});	
-
-		console.log(idTurma);
 	};
 
+	$scope.getClientesNaoMatriculados = function(idTurma){
+		$scope.clientesMatriculas = new Object();
+
+		$http({
+			method: 'POST',
+			url: '/adman/turma/getClientesNaoMatriculados',
+			headers: {
+				"Content-Type" :  "application/json"
+			},
+			data: idTurma,
+		}).success(function(data){
+			componentHandler.upgradeAllRegistered();
+			console.log(data);
+			$scope.clientesMatriculas = data;
+		});	
+	};
 
 	$scope.cadastrarTurma = function() {
 		console.log($scope.turma);
@@ -96,9 +112,35 @@ angular.module('adman', ['ui.mask', 'Alertify'])
 			for (var i = 0; i < data.length; i++) {
                 $scope.turmas[i] = data[i];
             };
-
 		})
 	};
+
+	$scope.addMatriculaCliente = function(idTurma){
+		$http({
+			method: 'POST',
+			url: '/adman/turma/addMatriculaCliente',
+			headers: {
+				"Content-Type" :  "application/json"
+			},
+			data: idTurma
+		}).success(function(data){
+			console.log(data);
+
+			$scope.getClientesMatriculados();
+		})
+	};
+
+	$scope.updateAutocomplete = function(){
+		// Getting current scope
+		var target = $(event.target);
+		var scope = angular.element(target).scope();
+
+		// console.log($scope.clientesMatriculas);
+		$scope.clientesMatriculas.hide();
+
+		console.log(scope);
+	};
+
 }).directive('excluirturma', function($parse, $http, Alertify) {
     return {
         require: 'ngModel',
@@ -142,7 +184,7 @@ angular.module('adman', ['ui.mask', 'Alertify'])
         link: function(scope, elm, attrs, ctrl) {
             elm.bind('click', function() {
             	scope.$parent.turma.idInstrutor = attrs.setinstrutor;
-            	scope.$parent.turma.nomeInstrutor = scope.instrutor.nomeInstrutor;
+            	scope.$parent.turma.nomeCliente = scope.instrutor.nomeCliente;
 
                 ctrl.$render = function() {
                     elm.html(ctrl.$viewValue);

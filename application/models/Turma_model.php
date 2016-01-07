@@ -112,14 +112,35 @@ class Turma_model extends CI_Model{
 	}
 
 	public function getClientesMatriculados($idTurma){
-		$query = "SELECT CONCAT(u.nome, ' ', u.sobrenome) as nomeInstrutor, u.email, c.sexo, c.telefone FROM aca_cliente c, aca_turma_cliente tc, aca_usuario u
-				  WHERE tc.idTurma = " . $idTurma . " 
-				  AND c.idCliente = tc.idCliente
-				  AND c.idUsuario = u.idUsuario";
+		$query = "SELECT CONCAT(u.nome, ' ', u.sobrenome) as nomeCliente, u.email, c.sexo, c.telefone, tc.idTurmaCliente as idTurmaCliente
+				  FROM {PRE}turma_cliente tc
+				  LEFT JOIN {PRE}cliente c ON c.idCliente = tc.idCliente
+				  LEFT JOIN {PRE}usuario u ON c.idUsuario = u.idUsuario
+				  WHERE tc.idTurma = " . $idTurma;
+
 
 		$clientes = $this->db->query($query)->result();
 
 		echo json_encode($clientes);
+	}
+
+	public function addMatriculaCliente($idTurma){
+		$this->db->insert('turma_cliente', array('idTurma' => $idTurma, 'idCliente' => 0));
+	}
+
+	public function getClientesNaoMatriculados($idTurma){
+		$query = "SELECT CONCAT(u.nome, ' ', u.sobrenome) as nomeCliente, c.idCliente as idCliente
+				  FROM {PRE}usuario u, {PRE}cliente c
+				  WHERE u.idUsuario = c.idUsuario
+				  AND c.idCliente NOT IN(
+				  		SELECT tc.idCliente
+				  		FROM {PRE}turma_cliente tc
+				  		WHERE idTurma = " . $idTurma . "
+				  	)";
+
+		$clientes = $this->db->query($query)->result();
+
+		echo print_r(json_encode($clientes), 1);
 	}
 
 }
