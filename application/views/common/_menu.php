@@ -2,7 +2,30 @@
 	<div class="mdl-layout__header-row">
 		<span class="mdl-layout-title"><?php echo (isset($title)) ? $title : "Título da página"; ?></span>
 		<div class="mdl-layout-spacer"></div>
-		<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+
+		<button class="mdl-button mdl-js-button mdl-button--icon" id="notificationsTopHeader">
+			<span class="material-icons mdl-badge" data-badge="1">speaker_notes</span>
+		</button>
+		<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="notificationsTopHeader">
+			<li class="mdl-menu__item">
+				<a href="#">Breve descrição da notificação</a>
+			</li>
+			<li class="mdl-menu__item">
+				<a href="#">Breve descrição da notificação</a>
+			</li>
+			<li class="mdl-menu__item">
+				<a href="#">Breve descrição da notificação</a>
+			</li>
+			<li class="mdl-menu__item">
+				<a href="#">Breve descrição da notificação</a>
+			</li>
+			<li class="mdl-menu__item">
+				<a href="#">Breve descrição da notificação</a>
+			</li>
+		</ul>
+
+
+		<div id="searchTopHeader" class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
 			<label class="mdl-button mdl-js-button mdl-button--icon" for="search">
 				<i class="material-icons">search</i>
 			</label>
@@ -11,10 +34,11 @@
 				<label class="mdl-textfield__label" for="search">Digite sua busca</label>
 			</div>
 		</div>
-		<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+
+		<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="moreTopHeader">
 			<i class="material-icons">more_vert</i>
 		</button>
-		<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+		<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="moreTopHeader">
 			<li class="mdl-menu__item">
 				<a href="<?php echo base_url('login/logout') ?>">Sair</a>
 			</li>
@@ -28,7 +52,7 @@
 		</a>
 		<div id="dropdownNickname">
 			<img src="https://placehold.it/50/FF5722/FFFFFF?text=M" id="profilePhoto">
-			<span id='nickname' title="Michell Ocaña">@michellocana</span>
+			<span id='nicknameMenu' title="Michell Ocaña">@michellocana</span>
 			<div class="mdl-layout-spacer"></div>
 			<button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
 				<i class="material-icons" role="presentation">arrow_drop_down</i>
@@ -68,6 +92,6 @@
 		</ul>
 		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'grafico') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">trending_up</i>Gráficos</a>
 		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'notificacoes') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">announcement</i>Notificações</a>
-		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'configuracoes') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Configurações</a>
+		<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'configuracoes') echo 'active' ?>" href="<?php echo base_url('configuracoes') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings</i>Configurações</a>
 	</nav>
 </div>

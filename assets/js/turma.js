@@ -24,6 +24,67 @@ angular.module('adman', ['ui.mask', 'Alertify'])
 
 	};
 
+	$scope.addCheckboxListener = function(){
+		MaterialDataTable.prototype.addEventListener = function(type, listener) {
+			'use strict';
+
+			var table = document.getElementById('tableClientesMatriculados');
+			var checkboxes = table.querySelector('tbody').querySelectorAll('.mdl-checkbox__input');
+			for (var i = 0; i < checkboxes.length; i++) {
+				checkboxes[i].addEventListener(type, listener);
+			}
+		};
+
+		MaterialDataTable.prototype.addEventListener('change', $scope.updateSelected);
+
+	};
+
+	$scope.addSelectAllListener = function(){
+		MaterialDataTable.prototype.addEventListener = function(type, listener) {
+			'use strict';
+
+			var table = document.getElementById('tableClientesMatriculados');
+
+			var checkboxes = table.querySelector('thead').querySelectorAll('.mdl-checkbox__input');
+
+			for (var i = 0; i < checkboxes.length; i++) {
+				checkboxes[i].addEventListener(type, listener);
+			}
+		};
+
+		MaterialDataTable.prototype.addEventListener('change', $scope.selectAllToggle);
+
+	};
+
+	$scope.selectAllToggle = function(event){
+		// Clearing array
+		$scope.selected = [];
+
+		// Updating array if checkbox is checked
+		if (event.target.checked) {
+			for (var i = 0; i < $scope.clientes.length; i++) {
+				currentId = $scope.clientes[i].idTurmaCliente;
+				currentId = parseInt(currentId);
+				$scope.selected.push(currentId);
+			};
+	    }
+	}
+
+	$scope.updateSelected = function(event){
+		// Getting current scope
+		var scope = angular.element($(this)).scope();
+
+		currentId = parseInt(scope.cliente.idTurmaCliente);
+
+		// Updating array
+		if (event.target.checked) {
+			$scope.selected.push(currentId);
+	    }else{
+			index = $scope.selected.indexOf(currentId);
+			$scope.selected.splice(index, 1);
+	    }
+	};
+
 	$scope.getInfo = function(idTurma){
 		$http({
 			method: 'POST',
@@ -48,6 +109,25 @@ angular.module('adman', ['ui.mask', 'Alertify'])
 			data: idTurma,
 		}).success(function(data){
 			$scope.clientes = data;
+
+            setTimeout(function(){
+                // Fixing data table bug after table is updated
+                $('.mdl-data-table').removeAttr('data-upgraded').removeClass('is-upgraded');
+                $('.mdl-data-table').find('th .mdl-data-table__select').parent().remove();
+                $('.mdl-data-table').find('td .mdl-data-table__select').parent().remove();
+                componentHandler.upgradeDom('MaterialSwitch');
+                componentHandler.upgradeDom('MaterialDataTable');
+                componentHandler.upgradeAllRegistered();
+
+                // Adding change listener to table checkboxes
+				$scope.selected = [];
+                $scope.addCheckboxListener();
+                $scope.addSelectAllListener();
+
+            },0);
+
+            console.log($scope.clientes);
+
 		});	
 	};
 
@@ -126,7 +206,7 @@ angular.module('adman', ['ui.mask', 'Alertify'])
 		}).success(function(data){
 			console.log(data);
 
-			$scope.getClientesMatriculados();
+			$scope.getClientesMatriculados($scope.turma.idTurma);
 		})
 	};
 
@@ -135,11 +215,109 @@ angular.module('adman', ['ui.mask', 'Alertify'])
 		var target = $(event.target);
 		var scope = angular.element(target).scope();
 
-		// console.log($scope.clientesMatriculas);
-		$scope.clientesMatriculas.hide();
 
-		console.log(scope);
+		listItems = $(target).parent().find('.mdl-menu li');
+		heightDecrease = 0;
+		menu = $(target).parent().find('.mdl-menu');
+		matchesCount = 0;
+
+		search = target.text();
+
+		for (var i = 0; i < listItems.length; i++) {
+			text = $(listItems[i]).find('a').text();
+
+			currentLi = $(listItems[i]);
+
+			if(search.substr(search.length - 1).match(/\s/g)){
+				search = search.substr(0, search.length - 1);
+			}
+
+			if(text.indexOf(search) > -1){
+				currentLi.css('display', 'block');
+				menu.closest('.mdl-menu__container').height(menu.innerHeight());
+				matchesCount++;
+			}else{
+				currentLi.css('display', 'none');
+				menu.closest('.mdl-menu__container').height(menu.innerHeight());
+			}
+
+		}
+
+		if(matchesCount == 0){
+			menu.addClass('no-results');
+			menu.append('<li class="alert-message">Sem resultados</li>')
+			menu.closest('.mdl-menu__container').height(menu.innerHeight());
+		}else{
+			menu.removeClass('no-results');
+			menu.find('li.alert-message').remove();
+		}
+
 	};
+
+	$scope.clearInput = function(){
+		// Getting current scope
+		var target = $(event.target);
+
+		
+		if(target.is('input') || target.is('textarea')) 
+			target.val('');
+		else
+			target.text('');
+
+		target.on('focusout', function(){
+			if(target.text().length < 1 || target.val().length < 1){
+				target.text('Nome do cliente').val('Nome do cliente');
+			}
+		});
+
+	};
+
+	$scope.excluirMatriculaCliente = function(){
+    	if($scope.selected.length > 0){
+    		if($scope.selected.length == 1){
+    			index = $scope.selected[0];
+
+    			for (var i = 0; i < $scope.clientes.length; i++) {
+    				if($scope.clientes[i].idTurmaCliente == index){
+    					nomeCliente = $scope.clientes[i].nomeCliente;
+    				}
+    			};
+
+    			message = 'Deseja cancelar a matrícula de "' + nomeCliente + '"?';
+    			messageSuccess = 'A matrícula de "' + nomeCliente + '" foi cancelada.';
+
+    		}else{
+    			message = 'Deseja cancelar as matrículas de ' + $scope.selected.length + ' clientes?';
+    			messageSuccess = $scope.selected.length + ' clientes tiveram as matrículas canceladas.';
+    		}
+
+	    	Alertify.confirm(message)
+			.then(function(){
+		        $http({
+		            method: 'POST',
+		            url: '/adman/turma/excluirMatriculaCliente',
+		            data: {
+		            	clientes: $scope.selected,
+		            	idTurma: parseInt($scope.turma.idTurma)
+		            },
+		            headers: {
+		                'Content-Type': 'application/json'
+		            }
+		        }).success(function(data){
+		        	$scope.selected = [];
+
+		        	console.log($scope.selected);
+
+					$scope.getClientesMatriculados($scope.turma.idTurma);
+					$scope.getClientesNaoMatriculados($scope.turma.idTurma);
+
+		        	Alertify.success(messageSuccess);
+		        });
+			});
+    	}else{
+			Alertify.error('Selecione um ou mais equipamentos para excluir');
+    	}
+    }
 
 }).directive('excluirturma', function($parse, $http, Alertify) {
     return {
@@ -233,4 +411,44 @@ angular.module('adman', ['ui.mask', 'Alertify'])
             });
         }
     };
+}).directive('updateturmacliente', function($parse, $http, Alertify) {
+    return {
+        require: 'ngModel',
+        link: function(scope, elm, attrs, ctrl) {
+            elm.bind('click', function() {
+
+            	dataUpdateTurmaCliente = {
+	            	idCliente: attrs.updateturmacliente,	
+	            	idTurmaCliente: scope.$parent.cliente.idTurmaCliente
+            	};
+
+            	$http({
+            		method: 'POST',
+            		data: dataUpdateTurmaCliente,
+            		url: '/adman/turma/updateTurmaCliente',
+            		headers: {
+            			"Content-Type" :  "application/json"
+            		},
+            	}).success(function(data){
+                	Alertify.success('Aluno matrículado com sucesso.');
+
+                	scope.$parent.cliente = data;
+
+                	console.log('ma oe ' + scope.$parent.clientes);
+
+	                ctrl.$render = function() {
+	                    elm.html(ctrl.$viewValue);
+	                };
+
+	                idTurma = scope.$parent.turma.idTurma;
+
+	            	scope.$parent.$parent.getClientesMatriculados(idTurma);
+	            	scope.$parent.$parent.getClientesNaoMatriculados(idTurma);
+
+	            })
+            });
+        }
+    };
 })
+
+//

@@ -23,4 +23,7 @@
 	<?php if($this->uri->segment(1) == 'turma'): ?>
 	<script src="<?php echo base_url('assets/js/turma.js'); ?>"></script>
 	<?php endif; ?>
+	<?php if($this->uri->segment(1) == 'configuracoes'): ?>
+	<script src="<?php echo base_url('assets/js/configuracoes.js'); ?>"></script>
+	<?php endif; ?>
 </html>

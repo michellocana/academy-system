@@ -143,4 +143,28 @@ class Turma_model extends CI_Model{
 		echo print_r(json_encode($clientes), 1);
 	}
 
+	public function updateTurmaCliente($turmaCliente){
+		$this->db->where('idTurmaCliente', intval($turmaCliente->idTurmaCliente));
+		$this->db->update('turma_cliente', array('idCliente' => intval($turmaCliente->idCliente)));
+
+		$query = "SELECT CONCAT(u.nome, ' ', u.sobrenome) as nomeCliente, c.idCliente as idCliente, c.sexo as sexo, u.email as email, c.telefone as telefone
+				  FROM {PRE}usuario u, {PRE}cliente c
+				  WHERE u.idUsuario = c.idUsuario
+				  AND c.idCliente = " . intval($turmaCliente->idCliente);
+
+		$result = $this->db->query($query)->result();
+		$result = $result[0];
+
+		echo json_encode($result);
+	}
+
+	public function excluirMatriculaCliente($clientes, $idTurma){
+		$this->db->where('idTurma', $idTurma);
+		$this->db->where_in('idTurmaCliente', $clientes);
+		$this->db->delete('turma_cliente');
+
+		echo $this->db->last_query();
+	}
+
+
 }

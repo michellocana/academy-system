@@ -108,6 +108,10 @@ html, body {
     border-radius: 24px;
 }
 
+#nicknameMenu{
+    padding-left: 10px;
+}
+
 #dropdownNickname{
     display: -webkit-box;
     display: -webkit-flex;
@@ -323,4 +327,122 @@ input[type=password][required]{
 }
 ::-webkit-scrollbar-thumb:window-inactive {
     background: rgba(117, 117, 117, 0.2); 
+}
+
+td > a{
+    min-height: 15px;
+    display: block;
+    width: 100%;
+}
+
+.mdl-menu__container.is-visible .mdl-menu__item{
+    position: relative;
+    display: block;
+}
+.mdl-menu__outline{
+    height: 100% !important;
+}
+
+.mdl-menu.no-results{
+    left: 0 !important;
+}
+
+.mdl-menu{
+    min-width: 100%;
+}
+
+.mdl-menu .alert-message{
+    height: 48px;
+    line-height: 48px;
+    display: block;
+    padding: 0 16px;
+    width: 100%;
+}
+
+#searchTopHeader{
+    position: absolute;
+    top: 0;
+    right: 100px;
+    padding: 0;
+    bottom: 0;
+    margin: auto;
+    height: 32px;
+}
+
+#searchTopHeader .mdl-button{
+    top: 0;
+    bottom: 0;
+}
+
+#searchTopHeader .mdl-textfield__expandable-holder{
+    height: 32px;
+    line-height: 32px;
+}
+
+#searchTopHeader ::-webkit-input-placeholder {
+    color: rgba(255,255,255,.5);
+}
+
+#searchTopHeader ::-moz-placeholder {
+    color: rgba(255,255,255,.5);
+}
+
+#searchTopHeader :-ms-input-placeholder {
+    color: rgba(255,255,255,.5);
+}
+
+#searchTopHeader :-moz-placeholder {
+    color: rgba(255,255,255,.5);
+}
+
+#moreTopHeader{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 20px;
+    margin: auto;
+}
+
+#fixedHeader .mdl-layout__header-row{
+    position: relative;
+}
+
+#notificationsTopHeader{
+    position: absolute;
+    top: 0;
+    right: 60px;
+    bottom: 0;
+    margin: auto;
+    border-radius: 0;
+    overflow: visible;
+}
+        #notificationsTopHeader:hover,
+        #notificationsTopHeader:active{
+            background-color: transparent !important;
+        }
+
+#notificacoesEmailTitle{
+    height: 48px;
+    line-height: 48px;
+}
+    #notificacoesEmailTitle .mdl-switch{
+        line-height: 26px;
+        height: 26px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 48px;
+        margin-left: 10px;
+    }
+
+#tableConfiguracoes td:first-child,
+#tableConfiguracoes th:first-child{
+    min-width: 200px;
+}
+
+a,
+button,
+label, 
+input,
+textarea{
+    outline: none;
 }
