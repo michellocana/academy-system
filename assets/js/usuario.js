@@ -57,8 +57,8 @@ angular.module('adman', ['ui.mask', 'Alertify'])
 		});
 	};
 
-	$scope.excluir = function(id, nome) {
-		var el = event.target;
+	$scope.excluir = function(id, nome, $event) {
+		var el = $event.target;
 
 		Alertify.confirm('Deseja excluir ' + nome + '?')
 		.then(function () {

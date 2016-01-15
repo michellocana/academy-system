@@ -3,7 +3,7 @@
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 		<?php $this->load->view('common/_menu'); ?>
 		<main class='mdl-layout__content mdl-color--grey-100'>
-			<table id="tableEquipamentos" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mtop30 " ng-cloak>
+			<table id="tableEquipamentos" class="mdl-data-table mdl-js-data-table <?php if($this->permissoes->equipamento->excluir){ echo 'mdl-data-table--selectable'; } ?> mdl-shadow--2dp mtop30 " ng-cloak>
 				<thead>
 					<tr>
 						<th>#</th>
@@ -19,13 +19,14 @@
 						<td>
 							{{equipamento.idEquipamento}}
 						</td>
-						<td updateequipamento="{{equipamento}}" ng-model="equipamento.nomeEquipamento" contenteditable>
+						<td <?php if($this->permissoes->equipamento->editar): ?> updateequipamento="{{equipamento}}" ng-model="equipamento.nomeEquipamento" contenteditable <?php endif; ?>>
 							{{equipamento.nomeEquipamento}}
 						</td>
-						<td updateequipamento="{{equipamento}}" ng-model="equipamento.descricaoEquipamento" contenteditable>
+						<td <?php if($this->permissoes->equipamento->editar): ?> updateequipamento="{{equipamento}}" ng-model="equipamento.descricaoEquipamento" contenteditable <?php endif; ?>>
 							{{equipamento.descricaoEquipamento}}
 						</td>
-						<td updateequipamento="{{equipamento}}" ng-model="equipamento.nomeModalidade">
+						<td <?php if($this->permissoes->equipamento->editar): ?> updateequipamento="{{equipamento}}" ng-model="equipamento.nomeModalidade" <?php endif; ?>>
+							<?php if($this->permissoes->equipamento->editar){ ?>
 							<a ng-if="equipamento.nomeModalidade" id="modalidade{{equipamento.idEquipamento}}" href="#">
 								{{equipamento.nomeModalidade}}
 							</a>
@@ -37,10 +38,14 @@
 									<a href="javascript:;" class="normal-fw" ng-model="nomeModalidade" updatemodalidade="{{modalidade.idModalidade}}" idequipamento="{{equipamento.idEquipamento}}">{{modalidade.nomeModalidade}}</a>
 								</li>
 							</ul>
+							<?php }else{ ?>
+							{{equipamento.nomeModalidade}}
+							<?php } ?>
 						</td>
 						<td>
+							<?php if($this->permissoes->equipamento->editar){ ?>
 							<div ng-if="equipamento.snAtivo == 'ATIVO'">
-								<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switchAtivo{{equipamento.idEquipamento}}">
+								<label class="<?php if($this->permissoes->equipamento->editar){ echo 'not-clickable'; } ?> mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switchAtivo{{equipamento.idEquipamento}}">
 									<input ng-click='switchAtivo(equipamento.idEquipamento)' type="checkbox" id="switchAtivo{{equipamento.idEquipamento}}" class="mdl-switch__input" checked>
 									<span class="mdl-switch__label"></span>
 								</label>
@@ -51,8 +56,17 @@
 									<span class="mdl-switch__label"></span>
 								</label>
 							</div>
+							<?php }else{ ?>
+							<div ng-if="equipamento.snAtivo == 'ATIVO'">
+								Ativo
+							</div>
+							<div ng-if="equipamento.snAtivo == 'INATIVO'">
+								Inativo
+							</div>
+							<?php } ?>
 						</td>
 						<td>
+							<?php if($this->permissoes->equipamento->editar){ ?>
 							<a class="empty" id="statusEquipamento{{equipamento.idEquipamento}}" href="#">
 								<i ng-if="equipamento.statusEquipamento == 'OK'" class="material-icons" title="Ok">done</i>
 								<i ng-if="equipamento.statusEquipamento == 'COM DEFEITO'" class="material-icons mdl-color-text--red" title="Com defeito">warning</i>
@@ -75,27 +89,38 @@
 									</a>
 								</li>
 							</ul>
+							<?php }else{ ?>
+							<i ng-if="equipamento.statusEquipamento == 'OK'" class="material-icons" title="Ok">done</i>
+							<i ng-if="equipamento.statusEquipamento == 'COM DEFEITO'" class="material-icons mdl-color-text--red" title="Com defeito">warning</i>
+							<i ng-if="equipamento.statusEquipamento == 'EM CONSERTO'" class="material-icons mdl-color-text--red" title="Em conserto">build</i>
+							<?php } ?>
 
 						</td>
 					</tr>
 				</tbody>
+				<?php if($this->permissoes->equipamento->adicionar or $this->permissoes->equipamento->excluir): ?>
 				<tfoot>
 					<tr>
-						<td colspan="5">	
+						<td colspan="5">
+							<?php if($this->permissoes->equipamento->adicionar): ?>	
 							<div class="form-options">
 								<button ng-click="addRow()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--green mdl-color-text--white">
 									<i class="material-icons">add</i>
 								</button>
 							</div>
+							<?php endif; ?>
 
+							<?php if($this->permissoes->equipamento->excluir): ?>	
 							<div class="form-options">								
 								<button ng-click="excluirEquipamento()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--red mdl-color-text--white">
 									<i class="material-icons">delete</i>
 								</button>
 							</div>
+							<?php endif; ?>
 						</td>
 					</tr>
 				</tfoot>
+				<?php endif; ?>
 			</table>
 			<div class="mdl-grid">
 				<div class="mdl-cell mdl-cell--12-col">

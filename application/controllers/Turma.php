@@ -8,6 +8,9 @@ class Turma extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('turma_model');
+
+        if(!checkVisualizar('turma'))
+            redirect(base_url());
     }
     
     public function index(){

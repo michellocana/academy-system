@@ -12,7 +12,9 @@
 						<th>Sobrenome</th>
 						<th>Tipo</th>
 						<th>E-mail</th>
+						<?php if($this->permissoes->usuario->excluir or $this->permissoes->usuario->editar): ?>
 						<th>Opções</th>
+						<?php endif; ?>
 					</tr>
 				</thead>
 				<tbody>	
@@ -25,12 +27,16 @@
 						<td><?php echo strip_quotation_marks($u->snTipo) ?></td>
 						<td><?php echo $u->email ?></td>
 						<td>
+							<?php if($this->permissoes->usuario->editar): ?>
 							<a href="<?php echo base_url('usuario/editar') . '/' . $u->idUsuario ?>" class="mdl-button small mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
 								Editar
 							</a>
-							<a ng-click="excluir(<?php echo $u->idUsuario ?>, '<?php echo $u->nome ?>')" class="mdl-button small mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+							<?php endif; ?>
+							<?php if($this->permissoes->usuario->excluir): ?>
+							<a ng-click="excluir(<?php echo $u->idUsuario ?>, '<?php echo $u->nome ?>', $event)" class="mdl-button small mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
 								Excluir
 							</a>
+							<?php endif; ?>
 						</td>
 					</tr>
 					<?php endforeach; ?>

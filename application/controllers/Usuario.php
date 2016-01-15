@@ -8,9 +8,13 @@ class Usuario extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('usuario_model');
+
+        if(!checkVisualizar('usuario'))
+            redirect(base_url());
     }
     
     public function index(){
+
         $data = array(
             "title" => "Usuário"
         );
@@ -18,10 +22,14 @@ class Usuario extends CI_Controller {
     }
 
     public function cadastro(){
-        $data = array(
-            "title" => "Cadastro de Usuário"
-        );
-        $this->load->view('usuario/cadastrar',$data);
+        if($this->permissoes->usuario->adicionar){
+            $data = array(
+                "title" => "Cadastro de Usuário"
+            );
+            $this->load->view('usuario/cadastrar',$data);
+        }else{
+            rdrHome();
+        }
     }
 
     public function cadastrar(){
@@ -80,6 +88,7 @@ class Usuario extends CI_Controller {
 
 
 
+
     }
 
     public function meusdados(){
@@ -118,17 +127,26 @@ class Usuario extends CI_Controller {
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata);
 
-        $idUsuario = $request->idUsuario;
+        if(!is_null($idUsuario) &&  $postdata){
 
-        $this->usuario_model->excluirUsuario($idUsuario);
+            $idUsuario = $request->idUsuario;
+
+            $this->usuario_model->excluirUsuario($idUsuario);
+        }else{
+            rdrHome();
+        }
     }
 
     public function editar(){
-        $data = array(
-            "title"         => "Editar Usuário"
-        );
+        if($this->permissoes->usuario->editar){
+            $data = array(
+                "title"         => "Editar Usuário"
+            );
 
-        $this->load->view('usuario/editar', $data);
+            $this->load->view('usuario/editar', $data);
+        }else{
+            rdrHome();
+        }
     }
 
     public function infoUsuario($idUsuario = null, $isCliente = false){

@@ -8,6 +8,9 @@ class Aula extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('aula_model');
+
+        if(!checkVisualizar('aula'))
+            redirect(base_url());
     }
     
     public function index(){

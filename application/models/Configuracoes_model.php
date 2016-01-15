@@ -19,6 +19,16 @@ class Configuracoes_model extends CI_Model{
 		echo json_encode($adms);
 	}
 
+	public function getNaoAdms(){
+		$query = "SELECT CONCAT(nome, ' ', sobrenome) AS nome, nickname, idUsuario
+				  FROM {PRE}usuario 
+				  WHERE snTipo = 'FUNC'";
+
+		$naoAdms = $this->db->query($query)->result();
+
+		echo json_encode($naoAdms);
+	}
+
 	public function removerPermissao($idUsuario){
 		$this->db->where('idUsuario', $idUsuario);
 		$this->db->update('usuario', array('snTipo' => 'FUNC'));
@@ -63,6 +73,7 @@ class Configuracoes_model extends CI_Model{
 	public function updatePermissao($fields){
 		$this->db->select('acesso');
 		$this->db->where('entidade', $fields->entidade);
+		$this->db->where('tipoUsuario', $fields->tipoUsuario);
 		$this->db->where('acao', $fields->acao);
 
 		$acesso = $this->db->get('permissoes')->result();
@@ -76,9 +87,19 @@ class Configuracoes_model extends CI_Model{
 
 		$this->db->where('entidade', $fields->entidade);
 		$this->db->where('acao', $fields->acao);
+		$this->db->where('tipoUsuario', $fields->tipoUsuario);
 		$this->db->update('permissoes', array('acesso' => $updateValue));
 
-		echo $this->db->last_query();
+		// $this->db->query('DELETE FROM {PRE}atualizacao_permissoes');
+
+		// $this->db->select('idUsuario');
+		// $usuarios = $this->db->get('usuario')->result();
+
+		// foreach ($usuarios as $usuario) {
+		// 	$this->db->insert('atualizacao_permissoes', array('idUsuario' => intval($usuario->idUsuario), 'atualizado' => 'N'));
+		// }
+
+
 	}
 
 	public function getPermissoes($tipoUsuario){
@@ -90,5 +111,28 @@ class Configuracoes_model extends CI_Model{
 		return $permissoes;
 	}
 
+	public function getEntidades(){
+		$entidades = $this->db->query('SELECT DISTINCT entidade FROM {PRE}permissoes')->result();
 
+		return $entidades;
+	}
+
+	public function addAdm($idUsuario){
+		$this->db->where('idUsuario', $idUsuario);
+		$this->db->update('usuario', array('snTipo' => 'ADM'));
+	}
+
+	public function checkPermissoesAlteradas(){
+		$this->db->select('idUsuario');
+		$this->db->where('nickname', $this->session->userdata('nickname'));
+		$usuario = $this->db->get('usuario')->result();
+		$usuario = $usuario[0];
+
+		$this->db->select('atualizado');
+		$this->db->where('idUsuario', $usuario->idUsuario);
+		$atualizado = $this->db->get('atualizacao_permissoes')->result();
+		$atualizado = $atualizado[0];
+
+		echo json_encode(array('atualizado' => $atualizado->atualizado));
+	}
 }

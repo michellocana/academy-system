@@ -8,6 +8,9 @@ class Modalidade extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('modalidade_model');
+
+        if(!checkVisualizar('modalidade_de_treino'))
+            redirect(base_url());
     }
     
     public function index(){

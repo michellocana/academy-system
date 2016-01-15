@@ -3,7 +3,7 @@
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
 		<?php $this->load->view('common/_menu'); ?>
 		<main class='mdl-layout__content mdl-color--grey-100'>
-			<table id="tableModalidades" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mtop30 " ng-cloak>
+			<table id="tableModalidades" class="mdl-data-table mdl-js-data-table <?php if($this->permissoes->modalidade_de_treino->excluir){ echo 'mdl-data-table--selectable'; } ?> mdl-shadow--2dp mtop30 " ng-cloak>
 				<thead>
 					<tr>
 						<th>#</th>
@@ -20,30 +20,31 @@
 						</td>
 					</tr>
 				</tbody>
+				<?php if($this->permissoes->modalidade_de_treino->adicionar or $this->permissoes->modalidade_de_treino->excluir): ?>
 				<tfoot>
 					<tr>
 						<td colspan="5">	
+							<?php if($this->permissoes->modalidade_de_treino->adicionar): ?>
 							<div class="form-options">
 								<button ng-click="addRow()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--green mdl-color-text--white">
 									<i class="material-icons">add</i>
 								</button>
-							</div>
+							</div>	
+							<?php endif; ?>
 
-							<div class="form-options">								
+							<?php if($this->permissoes->modalidade_de_treino->excluir): ?>
+							<div class="form-options">									
 								<button ng-click="excluirModalidade()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--red mdl-color-text--white">
 									<i class="material-icons">delete</i>
 								</button>
 							</div>
+							<?php endif; ?>
 						</td>
 					</tr>
 				</tfoot>
+				<?php endif; ?>
 			</table>
-			<div class="mdl-grid">
-				<div class="mdl-cell mdl-cell--12-col">
-					<div class="form-options">
-					</div>
-				</div>
-			</div>
+
 
 		</main>
 	</div>

@@ -29,3 +29,9 @@ if(!function_exists('getPost')){
         return $request;
 	}
 }
+
+if(!function_exists('rdrHome')){
+	function rdrHome(){
+		redirect(base_url());
+	}
+}

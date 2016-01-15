@@ -36,7 +36,8 @@
 					</h5>
 
 				</div>
-
+	
+				<?php if ($this->permissoes->permissao->editar): ?>
 				<div class="mdl-cell mdl-cell--12-col">
 					<h4>Permissões</h4>
 
@@ -71,7 +72,17 @@
 								</td>
 							</tr>
 						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="3">
+									<a ng-click="addAdm()" href="#" class="normal-link">
+										Adicionar usuário administrador												
+									</a>
+								</td>
+							</tr>
+						</tfoot>
 					</table>
+
 				</div>
 
 				<div class="mdl-cell mdl-cell--12-col">
@@ -92,19 +103,19 @@
 						</div>
 						<div class="mdl-card__supporting-text">
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="visualizarUsuarios">
-								<input type="checkbox" ng-click='updatePermissao("usuario","VISUALIZAR","FUNC")' id="visualizarUsuarios" updatevisualizar="['adicionarUsuarios', 'editarUsuarios', 'excluirUsuarios']" class="mdl-switch__input" <?php echo $visualizarusuario ?>>
+								<input type="checkbox" ng-click='updatePermissao("usuario","VISUALIZAR","FUNC",$event)' id="visualizarUsuarios" updatevisualizar="['adicionarUsuarios', 'editarUsuarios', 'excluirUsuarios']" class="mdl-switch__input" <?php echo $visualizarusuario ?>>
 								<span class="mdl-switch__label">Visualizar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="adicionarUsuarios">
-								<input type="checkbox" ng-click='updatePermissao("usuario","ADICIONAR","FUNC")' id="adicionarUsuarios" checkvisualizar="visualizarUsuarios" class="mdl-switch__input" <?php echo $adicionarusuario ?>>
+								<input type="checkbox" ng-click='updatePermissao("usuario","ADICIONAR","FUNC",$event)' id="adicionarUsuarios" checkvisualizar="visualizarUsuarios" class="mdl-switch__input" <?php echo $adicionarusuario ?>>
 								<span class="mdl-switch__label">Adicionar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="editarUsuarios">
-								<input type="checkbox" ng-click='updatePermissao("usuario","EDITAR","FUNC")' id="editarUsuarios" checkvisualizar="visualizarUsuarios" class="mdl-switch__input" <?php echo $editarusuario ?>>
+								<input type="checkbox" ng-click='updatePermissao("usuario","EDITAR","FUNC",$event)' id="editarUsuarios" checkvisualizar="visualizarUsuarios" class="mdl-switch__input" <?php echo $editarusuario ?>>
 								<span class="mdl-switch__label">Editar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="excluirUsuarios">
-								<input type="checkbox" ng-click='updatePermissao("usuario","EXCLUIR","FUNC")' id="excluirUsuarios" checkvisualizar="visualizarUsuarios" class="mdl-switch__input" <?php echo $excluirusuario ?>>
+								<input type="checkbox" ng-click='updatePermissao("usuario","EXCLUIR","FUNC",$event)' id="excluirUsuarios" checkvisualizar="visualizarUsuarios" class="mdl-switch__input" <?php echo $excluirusuario ?>>
 								<span class="mdl-switch__label">Excluir</span>
 							</label>
 						</div>
@@ -119,19 +130,19 @@
 						</div>
 						<div class="mdl-card__supporting-text">
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="visualizarEquipamentos">
-								<input type="checkbox" ng-click='updatePermissao("equipamento","VISUALIZAR","FUNC")' id="visualizarEquipamentos" updatevisualizar="['adicionarEquipamentos', 'editarEquipamentos', 'excluirEquipamentos']" class="mdl-switch__input" <?php echo $visualizarequipamento ?>>
+								<input type="checkbox" ng-click='updatePermissao("equipamento","VISUALIZAR","FUNC",$event)' id="visualizarEquipamentos" updatevisualizar="['adicionarEquipamentos', 'editarEquipamentos', 'excluirEquipamentos']" class="mdl-switch__input" <?php echo $visualizarequipamento ?>>
 								<span class="mdl-switch__label">Visualizar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="adicionarEquipamentos">
-								<input type="checkbox" ng-click='updatePermissao("equipamento","ADICIONAR","FUNC")' id="adicionarEquipamentos" checkvisualizar="visualizarEquipamentos" class="mdl-switch__input" <?php echo $adicionarequipamento ?>>
+								<input type="checkbox" ng-click='updatePermissao("equipamento","ADICIONAR","FUNC",$event)' id="adicionarEquipamentos" checkvisualizar="visualizarEquipamentos" class="mdl-switch__input" <?php echo $adicionarequipamento ?>>
 								<span class="mdl-switch__label">Adicionar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="editarEquipamentos">
-								<input type="checkbox" ng-click='updatePermissao("equipamento","EDITAR","FUNC")' id="editarEquipamentos" checkvisualizar="visualizarEquipamentos" class="mdl-switch__input" <?php echo $editarequipamento ?>>
+								<input type="checkbox" ng-click='updatePermissao("equipamento","EDITAR","FUNC",$event)' id="editarEquipamentos" checkvisualizar="visualizarEquipamentos" class="mdl-switch__input" <?php echo $editarequipamento ?>>
 								<span class="mdl-switch__label">Editar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="excluirEquipamentos">
-								<input type="checkbox" ng-click='updatePermissao("equipamento","EXCLUIR","FUNC")' id="excluirEquipamentos" checkvisualizar="visualizarEquipamentos" class="mdl-switch__input" <?php echo $excluirequipamento ?>>
+								<input type="checkbox" ng-click='updatePermissao("equipamento","EXCLUIR","FUNC",$event)' id="excluirEquipamentos" checkvisualizar="visualizarEquipamentos" class="mdl-switch__input" <?php echo $excluirequipamento ?>>
 								<span class="mdl-switch__label">Excluir</span>
 							</label>
 						</div>
@@ -146,19 +157,19 @@
 						</div>
 						<div class="mdl-card__supporting-text">
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="visualizarModalidadesDeTreino">
-								<input type="checkbox" ng-click='updatePermissao("modalidade-de-treino","VISUALIZAR","FUNC")' id="visualizarModalidadesDeTreino" updatevisualizar="['adicionarModalidadesDeTreino', 'editarModalidadesDeTreino', 'excluirModalidadesDeTreino']" class="mdl-switch__input" <?php echo $visualizarmodalidadedetreino ?>>
+								<input type="checkbox" ng-click='updatePermissao("modalidade_de_treino","VISUALIZAR","FUNC",$event)' id="visualizarModalidadesDeTreino" updatevisualizar="['adicionarModalidadesDeTreino', 'editarModalidadesDeTreino', 'excluirModalidadesDeTreino']" class="mdl-switch__input" <?php echo $visualizarmodalidadedetreino ?>>
 								<span class="mdl-switch__label">Visualizar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="adicionarModalidadesDeTreino">
-								<input type="checkbox" ng-click='updatePermissao("modalidade-de-treino","ADICIONAR","FUNC")' id="adicionarModalidadesDeTreino" checkvisualizar="visualizarModalidadesDeTreino" class="mdl-switch__input" <?php echo $adicionarmodalidadedetreino ?>>
+								<input type="checkbox" ng-click='updatePermissao("modalidade_de_treino","ADICIONAR","FUNC",$event)' id="adicionarModalidadesDeTreino" checkvisualizar="visualizarModalidadesDeTreino" class="mdl-switch__input" <?php echo $adicionarmodalidadedetreino ?>>
 								<span class="mdl-switch__label">Adicionar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="editarModalidadesDeTreino">
-								<input type="checkbox" ng-click='updatePermissao("modalidade-de-treino","EDITAR","FUNC")' id="editarModalidadesDeTreino" checkvisualizar="visualizarModalidadesDeTreino" class="mdl-switch__input" <?php echo $editarmodalidadedetreino ?>>
+								<input type="checkbox" ng-click='updatePermissao("modalidade_de_treino","EDITAR","FUNC",$event)' id="editarModalidadesDeTreino" checkvisualizar="visualizarModalidadesDeTreino" class="mdl-switch__input" <?php echo $editarmodalidadedetreino ?>>
 								<span class="mdl-switch__label">Editar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="excluirModalidadesDeTreino">
-								<input type="checkbox" ng-click='updatePermissao("modalidade-de-treino","EXCLUIR","FUNC")' id="excluirModalidadesDeTreino" checkvisualizar="visualizarModalidadesDeTreino" class="mdl-switch__input" <?php echo $excluirmodalidadedetreino ?>>
+								<input type="checkbox" ng-click='updatePermissao("modalidade_de_treino","EXCLUIR","FUNC",$event)' id="excluirModalidadesDeTreino" checkvisualizar="visualizarModalidadesDeTreino" class="mdl-switch__input" <?php echo $excluirmodalidadedetreino ?>>
 								<span class="mdl-switch__label">Excluir</span>
 							</label>
 						</div>
@@ -173,19 +184,19 @@
 						</div>
 						<div class="mdl-card__supporting-text">
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="visualizarAulas">
-								<input type="checkbox" ng-click='updatePermissao("aula","VISUALIZAR","FUNC")' id="visualizarAulas" updatevisualizar="['adicionarAulas', 'editarAulas', 'excluirAulas']" class="mdl-switch__input" <?php echo $visualizaraula ?>>
+								<input type="checkbox" ng-click='updatePermissao("aula","VISUALIZAR","FUNC",$event)' id="visualizarAulas" updatevisualizar="['adicionarAulas', 'editarAulas', 'excluirAulas']" class="mdl-switch__input" <?php echo $visualizaraula ?>>
 								<span class="mdl-switch__label">Visualizar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="adicionarAulas">
-								<input type="checkbox" ng-click='updatePermissao("aula","ADICIONAR","FUNC")' id="adicionarAulas" checkvisualizar="visualizarAulas" class="mdl-switch__input" <?php echo $adicionaraula ?>>
+								<input type="checkbox" ng-click='updatePermissao("aula","ADICIONAR","FUNC",$event)' id="adicionarAulas" checkvisualizar="visualizarAulas" class="mdl-switch__input" <?php echo $adicionaraula ?>>
 								<span class="mdl-switch__label">Adicionar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="editarAulas">
-								<input type="checkbox" ng-click='updatePermissao("aula","EDITAR","FUNC")' id="editarAulas" checkvisualizar="visualizarAulas" class="mdl-switch__input" <?php echo $editaraula ?>>
+								<input type="checkbox" ng-click='updatePermissao("aula","EDITAR","FUNC",$event)' id="editarAulas" checkvisualizar="visualizarAulas" class="mdl-switch__input" <?php echo $editaraula ?>>
 								<span class="mdl-switch__label">Editar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="excluirAulas">
-								<input type="checkbox" ng-click='updatePermissao("aula","EXCLUIR","FUNC")' id="excluirAulas" checkvisualizar="visualizarAulas" class="mdl-switch__input" <?php echo $excluiraula ?>>
+								<input type="checkbox" ng-click='updatePermissao("aula","EXCLUIR","FUNC",$event)' id="excluirAulas" checkvisualizar="visualizarAulas" class="mdl-switch__input" <?php echo $excluiraula ?>>
 								<span class="mdl-switch__label">Excluir</span>
 							</label>
 						</div>
@@ -200,19 +211,19 @@
 						</div>
 						<div class="mdl-card__supporting-text">
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="visualizarTurmas">
-								<input type="checkbox" ng-click='updatePermissao("turma","VISUALIZAR","FUNC");' id="visualizarTurmas" updatevisualizar="['adicionarTurmas', 'editarTurmas', 'excluirTurmas']"  class="mdl-switch__input" <?php echo $visualizarturma ?>>
+								<input type="checkbox" ng-click='updatePermissao("turma","VISUALIZAR","FUNC",$event);' id="visualizarTurmas" updatevisualizar="['adicionarTurmas', 'editarTurmas', 'excluirTurmas']"  class="mdl-switch__input" <?php echo $visualizarturma ?>>
 								<span class="mdl-switch__label">Visualizar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="adicionarTurmas">
-								<input type="checkbox" ng-click='updatePermissao("turma","ADICIONAR","FUNC")' id="adicionarTurmas" checkvisualizar="visualizarTurmas" class="mdl-switch__input" <?php echo $adicionarturma ?>>
+								<input type="checkbox" ng-click='updatePermissao("turma","ADICIONAR","FUNC",$event)' id="adicionarTurmas" checkvisualizar="visualizarTurmas" class="mdl-switch__input" <?php echo $adicionarturma ?>>
 								<span class="mdl-switch__label">Adicionar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="editarTurmas">
-								<input type="checkbox" ng-click='updatePermissao("turma","EDITAR","FUNC")' id="editarTurmas" checkvisualizar="visualizarTurmas" class="mdl-switch__input" <?php echo $editarturma ?>>
+								<input type="checkbox" ng-click='updatePermissao("turma","EDITAR","FUNC",$event)' id="editarTurmas" checkvisualizar="visualizarTurmas" class="mdl-switch__input" <?php echo $editarturma ?>>
 								<span class="mdl-switch__label">Editar</span>
 							</label>
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="excluirTurmas">
-								<input type="checkbox" ng-click='updatePermissao("turma","EXCLUIR","FUNC")' id="excluirTurmas" checkvisualizar="visualizarTurmas" class="mdl-switch__input" <?php echo $excluirturma ?>>
+								<input type="checkbox" ng-click='updatePermissao("turma","EXCLUIR","FUNC",$event)' id="excluirTurmas" checkvisualizar="visualizarTurmas" class="mdl-switch__input" <?php echo $excluirturma ?>>
 								<span class="mdl-switch__label">Excluir</span>
 							</label>
 						</div>
@@ -227,18 +238,34 @@
 						</div>
 						<div class="mdl-card__supporting-text">
 							<label class="label-configuracao mdl-switch mdl-js-switch mdl-js-ripple-effect" for="visualizarGraficos">
-								<input type="checkbox" ng-click='updatePermissao("grafico","VISUALIZAR","FUNC")' id="visualizarGraficos" class="mdl-switch__input" <?php echo $visualizargrafico ?>>
-								<span class="mdl-switch__label">Visualizar</span>f
+								<input type="checkbox" ng-click='updatePermissao("grafico","VISUALIZAR","FUNC",$event)' id="visualizarGraficos" class="mdl-switch__input" <?php echo $visualizargrafico ?>>
+								<span class="mdl-switch__label">Visualizar</span>
 							</label>
 						</div>
 					</div>
 				</div>
+				<?php endif ?>
 
 
-				
 			</div>
 		</main>
 	</div>
+	<script type="text/td" id="templateTd">
+		<td>{{mdlMenu}}</td>
+	</script>
+
+	<script type="text/mdlMenu" id="templateMdlMenu">
+		<a class="empty" href="#" id="autocompleteAdm" ng-model='autocompleteAdm' ng-keyup="updateAutocomplete()" ng-focus='clearInput()' contenteditable>Nome do cliente</a>
+		<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="autocompleteAdm">
+			{{mdlMenuItems}}
+		</ul>
+	</script>
+
+	<script type="text/mdlMenuItem" id="templateMdlMenuItem">
+		<li class="mdl-menu__item">
+			<a href="javascript:;" class="normal-fw addAdm" idusuario="{{idUsuario}}">{{nomeUsuario}}</a>
+		</li>
+	</script>
 
 	<?php $this->load->view('common/_footer'); ?>
 </body>

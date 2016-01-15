@@ -8,6 +8,10 @@ class Equipamento extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('equipamento_model');
+
+        if(!checkVisualizar('equipamento'))
+            redirect(base_url());
+
     }
     
     public function index(){

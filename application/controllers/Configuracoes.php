@@ -27,7 +27,7 @@ class Configuracoes extends CI_Controller {
             $key .= $pf->entidade;
 
             $key = strtolower($key);
-            $key = str_replace('-', '', $key);
+            $key = str_replace('_', '', $key);
 
             $data[$key] = ($pf->acesso == 'S') ? 'checked' : '';
         }
@@ -37,6 +37,10 @@ class Configuracoes extends CI_Controller {
 
     public function getAdms(){
         return $this->configuracoes_model->getAdms();
+    }
+
+    public function getNaoAdms(){
+        return $this->configuracoes_model->getNaoAdms();
     }
 
     public function removerPermissao(){
@@ -55,4 +59,19 @@ class Configuracoes extends CI_Controller {
 
         $this->configuracoes_model->updatePermissao($fields);
     }
+
+    public function addAdm(){
+        $idUsuario = getPost();
+        $this->configuracoes_model->addAdm($idUsuario);
+    }
+
+    public function getMenu(){
+        $html = $this->load->view('common/_sidemenu', true);
+        echo json_encode($html);
+    }
+
+    public function checkPermissoesAlteradas(){
+        $this->configuracoes_model->checkPermissoesAlteradas();
+    }
+ 
 }

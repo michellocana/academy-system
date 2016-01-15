@@ -39,17 +39,8 @@
 	<tfoot>
 		<tr>
 			<td colspan="5">	
-				<div class="form-options">
-					<button type="button" ng-click="addMatriculaCliente(<?php echo $this->uri->segment(3) ?>)" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--green mdl-color-text--white">
-						<i class="material-icons">add</i>
-					</button>
-				</div>
-
-				<div class="form-options">								
-					<button ng-click="excluirMatriculaCliente()" type="button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--red mdl-color-text--white">
-						<i class="material-icons">delete</i>
-					</button>
-				</div>
+				<a href="#" ng-click="addMatriculaCliente(<?php echo $this->uri->segment(3) ?>)" class="normal-link dspiblock mright10">Matricular aluno</a>
+				<a href="#" ng-click="excluirMatriculaCliente()" class="normal-link dspiblock">Remover selecionados</a>
 			</td>
 		</tr>
 	</tfoot>
