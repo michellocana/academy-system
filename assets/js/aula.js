@@ -2,7 +2,18 @@ angular.module('adman', ['ui.mask', 'Alertify'])
 .controller('aula', function($scope, $http, $window, Alertify) {
 	$scope.initAulas = function(){
 		$scope.listarAulas();
-		$scope.listarModalidades();
+
+		$http({
+			method: 'POST',
+			url: '/adman/aula/checkEditar',
+			headers: {
+				"Content-Type" :  "application/json"
+			},
+		}).success(function(data2){
+			if(data2){
+				$scope.listarModalidades();
+			}
+		});
 	};
 
 	$scope.addCheckboxListener = function(){

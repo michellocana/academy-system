@@ -53,4 +53,8 @@ class Aula extends CI_Controller {
         $this->aula_model->updateModalidade($data->idAula, $data->idModalidade);
     }
 
+    public function checkEditar(){
+        echo $this->permissoes->aula->editar;
+    }
+
 }

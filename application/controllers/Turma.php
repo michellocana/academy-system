@@ -18,19 +18,27 @@ class Turma extends CI_Controller {
     }
 
     public function cadastro(){
-        $data = array(
-            "title" => "Cadastro de Turma"
-        );
+        if($this->permissoes->turma->adicionar){
+            $data = array(
+                "title" => "Cadastro de Turma"
+            );
 
-        $this->load->view('turma/cadastrar');
+            $this->load->view('turma/cadastrar');
+        }else{
+            rdrHome();
+        }
     }
 
     public function editar(){
-        $data = array(
-            "title" => "Editar Turma"
-        );
+        if($this->permissoes->turma->editar){
+            $data = array(
+                "title" => "Editar Turma"
+            );
 
-        $this->load->view('turma/cadastrar');
+            $this->load->view('turma/cadastrar');
+        }else{
+            rdrHome();
+        }
     }
 
     public function listar(){

@@ -11,7 +11,9 @@
 						<th>Aula</th>
 						<th>Capacidade</th>
 						<th>Status</th>
+						<?php if($this->permissoes->turma->editar or $this->permissoes->turma->excluir): ?>
 						<th>Opções</th>
+						<?php endif; ?>
 					</tr>
 				</thead>
 				<tbody>	
@@ -29,6 +31,7 @@
 							{{turma.capacidade}}
 						</td>
 						<td>
+							<?php if($this->permissoes->turma->editar){ ?>
 							<a href="" id="statusTurma{{turma.idTurma}}">
 								<span ng-if="turma.statusTurma == 'INSCRICOES ABERTAS'">Incrições abertas</span>
 								<span ng-if="turma.statusTurma == 'INSCRICOES ENCERRADAS'">Inscrições encerradas</span>
@@ -51,16 +54,26 @@
 									</a>
 								</li>
 							</ul>
+							<?php }else{ ?>
+								{{turma.statusTurma}}
+							<?php } ?>
 
 						</td>
+						<?php if($this->permissoes->turma->editar or $this->permissoes->turma->excluir): ?>
 						<td>
+							<?php if ($this->permissoes->turma->editar): ?>								
 							<a href="<?php echo base_url('turma/editar') . '/'; ?>{{turma.idTurma}}" class="mdl-button small mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
 								Editar
 							</a>
+							<?php endif ?>
+
+							<?php if ($this->permissoes->turma->excluir): ?>								
 							<a ng-model="excluirTurma" excluirturma="{{turma.idTurma}}" sigla="{{turma.sigla}}" class="mdl-button small mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
 								Excluir
 							</a>
+							<?php endif ?>
 						</td>
+						<?php endif; ?>
 					</tr>
 				</tbody>
 			</table>

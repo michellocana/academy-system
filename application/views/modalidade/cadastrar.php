@@ -15,7 +15,8 @@
 						<td>
 							{{modalidade.idModalidade}}
 						</td>
-						<td updatemodalidade="{{modalidade}}" ng-model="modalidade.nomeModalidade" contenteditable>
+							
+						<td <?php if($this->permissoes->modalidade_de_treino->editar): ?> updatemodalidade="{{modalidade}}" ng-model="modalidade.nomeModalidade" contenteditable <?php endif; ?>>
 							{{modalidade.nomeModalidade}}
 						</td>
 					</tr>

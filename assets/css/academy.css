@@ -169,6 +169,10 @@ html, body {
     background-color: #ff5722;
     color: #fff;
 }
+    #fixedHeader.full{
+        width: 100%;
+        margin-left: 0;
+    }
 
 #fixedHeader .mdl-button:hover{
     background-color: rgba(255,255,255,.25);
@@ -486,3 +490,39 @@ textarea{
     float: none
 }
 
+
+main.full{
+    margin-left: 0 !important;
+    width: 100%;
+}
+
+#fullscreenTopHeader,
+#homeTopHeader{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+    #homeTopHeader{
+        right: 20px;
+    }
+    #fullscreenTopHeader{
+        right: 60px;
+    }
+
+.hide-options .alertify-buttons{
+    display: none;
+}
+
+.mdl-textfield.is-invalid .mdl-textfield__input, 
+.mdl-textfield .mdl-textfield__input, 
+.mdl-textfield.is-invalid .mdl-textfield__label,
+.mdl-textfield .mdl-textfield__label{
+    color: rgba(255, 255, 255, 0.56) !important;
+    border-color: rgba(255, 255, 255, 0.56) !important;
+}
+
+.mdl-textfield .mdl-textfield__label:after,
+.mdl-textfield.is-invalid .mdl-textfield__label:after{
+    background-color: rgba(255, 255, 255, 0.56) !important;
+}
