@@ -29,4 +29,9 @@
 	<?php if($this->uri->segment(1) == 'entrada-saida'): ?>
 	<script src="<?php echo base_url('assets/js/entrada-saida.js'); ?>"></script>
 	<?php endif; ?>
+	<?php if($this->uri->segment(1) == ''): ?>
+	<script src="<?php echo base_url('assets/js/graphs/highcharts.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/graphs/modules/exporting.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/grafico.js'); ?>"></script>
+	<?php endif; ?>
 </html>

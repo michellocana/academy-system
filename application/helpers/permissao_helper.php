@@ -31,6 +31,10 @@
 		}
 	}
 
+	if(isset($session['checkAdmPass']) and $ci->uri->segment(1) != 'entrada-saida' and $ci->uri->segment(1) != 'login'){
+		redirect(base_url('login/logout'));
+	}
+
 	if(!function_exists('checkVisualizar')){
 		function checkVisualizar($entidade){
 			$ci =& get_instance();

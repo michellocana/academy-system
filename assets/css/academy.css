@@ -308,6 +308,9 @@ input[type=password][required]{
 .alertify-log-success{
     background-color: #4caf50 !important;
 }
+.alertify-log-success.teste{
+    background-color: red !important;
+}
 
 *[contenteditable]{
     outline: none;
@@ -510,19 +513,48 @@ main.full{
         right: 60px;
     }
 
-.hide-options .alertify-buttons{
-    display: none;
-}
-
-.mdl-textfield.is-invalid .mdl-textfield__input, 
-.mdl-textfield .mdl-textfield__input, 
-.mdl-textfield.is-invalid .mdl-textfield__label,
-.mdl-textfield .mdl-textfield__label{
+input[type=password][required].white,
+.mdl-textfield.is-invalid .mdl-textfield__input.white, 
+.mdl-textfield .mdl-textfield__input.white, 
+.mdl-textfield.is-invalid .mdl-textfield__label.white,
+.mdl-textfield .mdl-textfield__label.white{
     color: rgba(255, 255, 255, 0.56) !important;
     border-color: rgba(255, 255, 255, 0.56) !important;
 }
 
-.mdl-textfield .mdl-textfield__label:after,
-.mdl-textfield.is-invalid .mdl-textfield__label:after{
+.mdl-textfield .mdl-textfield__label.white:after,
+.mdl-textfield.is-invalid .mdl-textfield__label.white:after{
     background-color: rgba(255, 255, 255, 0.56) !important;
+}
+
+h6.w300-centered{
+    width: 100%;
+    max-width: 300px;
+    display: table;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#formEntradaSaida{
+    margin-top: 5rem;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    float: none;
+}   
+    #formEntradaSaida .mdl-button{
+        margin-left: 0;
+    }
+    #formEntradaSaida .mdl-textfield{
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+        display: table;
+    }
+
+.graph{
+    width: 100%;
+    margin-bottom: 50px
 }

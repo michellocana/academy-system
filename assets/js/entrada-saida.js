@@ -33,10 +33,63 @@ angular.module('adman', ['ui.mask', 'Alertify'])
 	};
 
 	$scope.home = function(){
-		// $('#alertify').addClass('hide-ok');
-		Alertify.confirm($('#templateRequestPassword').text(), 'hide-options');
+		Alertify.confirm($('#templateRequestPassword').text(),'alertify-adm-pass');
 		componentHandler.upgradeDom('MaterialTextfield');
+		admPass = $('#admPass');
+		okBtn = $('.alertify-adm-pass #alertify-ok');
+
+		okBtn.on('click', function(event){
+			if(admPass.val() == '')
+				Alertify.error('Digite sua senha de administrador para voltar ao sistema.');
+			else{
+				$http({
+					method: 'POST',
+					url: '/adman/entrada-saida/checkPasswordMatch',
+					headers: {
+						"Content-Type" :  "application/json"
+					},
+					data: {pass: admPass.val()},
+				}).success(function(data){
+					if(data){
+						$window.location.href = '/adman/';
+					}else{
+						Alertify.error("Senha de administrador incorreta.");
+					}
+				});
+
+			}
+		});
 	};
+
+	$scope.registrarEntradaSaida = function(){
+		$http({
+			method: 'POST',
+			url: '/adman/entrada-saida/registrarEntradaSaida',
+			headers: {
+				"Content-Type" :  "application/json"
+			},
+			data: {
+				user: $scope.dsNomeEntradaSaida,
+				pass: $scope.dsPasswordEntradaSaida,
+			},
+		}).success(function(data){
+			if(data){
+				console.log(data);
+				if(data.entradaSaida == 'ENTRADA'){
+					Alertify.success('Entrada registrada - ' + data.hora);
+				}else{
+					Alertify.log('Saída registrada - ' + data.hora);
+				}
+
+
+			}else{
+				Alertify.error("Nome de usuário, e-mail ou senha incorreta.");
+			}
+			
+			$scope.dsPasswordEntradaSaida = '';
+			$scope.dsNomeEntradaSaida = '';
+		});
+	}
 
 }).directive('resize', function ($window) {
     return function (scope, element, attr) {

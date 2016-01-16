@@ -56,3 +56,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['/'] = 'home';
 $route['usuario/meus-dados'] = 'usuario/meusdados';
 $route['entrada-saida'] = 'entradasaida';
+$route['entrada-saida/(:any)'] = 'entradasaida/$1';

@@ -81,7 +81,7 @@
 	// Begin gráfico 
 	if(checkVisualizar('grafico')):
 ?>
-<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'grafico') echo 'active' ?>" href="<?php echo base_url() ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">trending_up</i>Gráficos</a>
+<a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect <?php if($this->uri->segment(1) == 'grafico') echo 'active' ?>" href="<?php echo base_url('grafico') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">trending_up</i>Gráficos</a>
 <?php 
 	endif;
 	// End gráfico 

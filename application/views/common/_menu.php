@@ -24,7 +24,8 @@
 				<a href="#">Breve descrição da notificação</a>
 			</li>
 		</ul>
-
+		
+		<?php /*
 		<div id="searchTopHeader" class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
 			<label class="mdl-button mdl-js-button mdl-button--icon" for="search">
 				<i class="material-icons">search</i>
@@ -34,6 +35,7 @@
 				<label class="mdl-textfield__label" for="search">Digite sua busca</label>
 			</div>
 		</div>
+		*/ ?>
 
 		<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="moreTopHeader">
 			<i class="material-icons">more_vert</i>

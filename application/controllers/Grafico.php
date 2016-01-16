@@ -13,6 +13,12 @@ class Grafico extends CI_Controller {
     }
     
     public function index(){
+		$data = array(
+			"title" => "Gráficos"
+		);
+
+		$this->load->view('grafico/grafico', $data);
     }
+
 
 }
